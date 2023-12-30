@@ -1,17 +1,30 @@
-pluginManagement {
+dependencyResolutionManagement {
     repositories {
-        google()
+        google {
+            mavenContent {
+                includeGroupByRegex(".*google.*")
+                includeGroupByRegex(".*android.*")
+            }
+        }
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
     }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
+
+    pluginManagement {
+        repositories {
+            google {
+                mavenContent {
+                    includeGroupByRegex(".*google.*")
+                    includeGroupByRegex(".*android.*")
+                }
+            }
+            mavenCentral()
+            gradlePluginPortal()
+        }
     }
 }
 
 rootProject.name = "Spotify-KMP"
 include(":app")
+include(":shared")
