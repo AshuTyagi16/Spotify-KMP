@@ -14,3 +14,5 @@
 .cxx
 local.properties
 shared/build
+shared/core-logger/build
+shared/core-network/build

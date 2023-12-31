@@ -29,3 +29,4 @@ rootProject.name = "Spotify-KMP"
 include(":app")
 include(":shared")
 include(":shared:core-network")
+include(":shared:core-logger")
