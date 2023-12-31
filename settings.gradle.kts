@@ -28,3 +28,4 @@ dependencyResolutionManagement {
 rootProject.name = "Spotify-KMP"
 include(":app")
 include(":shared")
+include(":shared:core-network")
