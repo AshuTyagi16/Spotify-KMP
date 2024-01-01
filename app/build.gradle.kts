@@ -52,11 +52,21 @@ android {
 
 dependencies {
 
+    // Shared Module
+    implementation(project(":shared"))
+
+    // Shared Core Network Module
+    implementation(project(":shared:core-network"))
+
     // Core Ktx
     implementation(libs.core.ktx)
 
     // Lifecycle Ktx
     implementation(libs.lifecycle.runtime.ktx)
+
+    // Koin
+    implementation(libs.koin)
+    implementation(libs.koin.android)
 
     //Compose
     implementation(libs.activity.compose)

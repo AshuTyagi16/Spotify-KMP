@@ -26,7 +26,17 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            //put your multiplatform dependencies here
+            // Koin
+            implementation(libs.koin)
+
+            // Shared Core Network Module
+            implementation(project(":shared:core-network"))
+
+            // Shared Core Preferences Module
+            implementation(project(":shared:core-preferences"))
+
+            // Shared Core Logger Module
+            implementation(project(":shared:core-logger"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

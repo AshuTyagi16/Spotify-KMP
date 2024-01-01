@@ -20,6 +20,7 @@ kermit = "2.0.2"
 ktor = "2.3.7"
 prferences = "1.1.1"
 build-konfig = "0.15.1"
+koin = "3.5.3"
 
 [libraries]
 ## Core-Ktx
@@ -61,6 +62,9 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 ## Logger
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 build-konfig = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "build-konfig" }
+
+koin = { module = "io.insert-koin:koin-core", version.ref = "koin"}
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
 
 ## Testing
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

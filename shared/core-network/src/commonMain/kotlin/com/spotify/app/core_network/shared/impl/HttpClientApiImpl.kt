@@ -3,7 +3,6 @@ package com.spotify.app.core_network.shared.impl
 import com.spotify.app.core_logger.shared.api.LoggerApi
 import com.spotify.app.core_network.shared.CoreNetworkBuildKonfig
 import com.spotify.app.core_network.shared.api.HttpClientApi
-import com.spotify.app.core_preferences.shared.impl.util.PreferenceUtil
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpTimeout
@@ -19,6 +18,7 @@ import io.ktor.client.plugins.observer.ResponseObserver
 import com.spotify.app.core_network.shared.impl.util.NetworkConstants.Endpoints
 import com.spotify.app.core_network.shared.impl.model.RefreshTokenRequest
 import com.spotify.app.core_network.shared.impl.model.RefreshTokenResponse
+import com.spotify.app.core_preferences.shared.api.PreferenceUtilApi
 import io.ktor.client.request.host
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -34,8 +34,9 @@ import kotlinx.serialization.json.Json
 
 class HttpClientApiImpl(
     private val shouldEnableLogging: Boolean,
+    private val httpEngineProvider: HttpEngineProvider,
     private val loggerApi: LoggerApi,
-    private val preferenceUtil: PreferenceUtil
+    private val preferenceUtilApi: PreferenceUtilApi,
 ) : HttpClientApi {
 
     companion object {
@@ -56,7 +57,7 @@ class HttpClientApiImpl(
         }
     }
 
-    override fun getHttpClient(httpEngineProvider: HttpEngineProvider): HttpClient {
+    override fun getHttpClient(): HttpClient {
         return HttpClient(httpEngineProvider.clientEngine(shouldEnableLogging)) {
             expectSuccess = true
 
@@ -74,8 +75,8 @@ class HttpClientApiImpl(
                 bearer {
                     loadTokens {
                         BearerTokens(
-                            accessToken = preferenceUtil.getAccessToken()!!,
-                            refreshToken = preferenceUtil.getRefreshToken()!!
+                            accessToken = preferenceUtilApi.getAccessToken()!!,
+                            refreshToken = preferenceUtilApi.getRefreshToken()!!
                         )
                     }
                     refreshTokens {
@@ -86,7 +87,7 @@ class HttpClientApiImpl(
                             setBody(
                                 RefreshTokenRequest(
                                     grantType = "",
-                                    refreshToken = preferenceUtil.getRefreshToken()!!,
+                                    refreshToken = preferenceUtilApi.getRefreshToken()!!,
                                     clientId = ""
                                 )
                             )
@@ -97,8 +98,8 @@ class HttpClientApiImpl(
                         val refreshToken = refreshTokenResponse.refreshToken
 
                         runBlocking {
-                            preferenceUtil.setAccessToken(accessToken)
-                            preferenceUtil.setRefreshToken(refreshToken)
+                            preferenceUtilApi.setAccessToken(accessToken)
+                            preferenceUtilApi.setRefreshToken(refreshToken)
                         }
 
                         BearerTokens(

@@ -1,3 +1,4 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
@@ -40,6 +41,9 @@ kotlin {
             // Ktor
             implementation(libs.bundles.ktor.common)
 
+            // Koin
+            implementation(libs.koin)
+
             // Core-Logger Module
             implementation(project(":shared:core-logger"))
 
@@ -73,6 +77,15 @@ buildkonfig {
     defaultConfigs {
         buildConfigField(STRING, "BASE_URL", "api.spotify.com")
         buildConfigField(STRING, "BASE_URL_AUTH", "accounts.spotify.com")
+        buildConfigField(BOOLEAN, "DEBUG", "true")
+    }
+
+    defaultConfigs("debug") {
+        buildConfigField(BOOLEAN, "DEBUG", "true")
+    }
+
+    defaultConfigs("release") {
+        buildConfigField(BOOLEAN, "DEBUG", "false")
     }
 }
 

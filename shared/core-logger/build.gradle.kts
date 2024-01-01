@@ -1,7 +1,10 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.com.android.library)
+    id(libs.plugins.build.konfig.get().toString())
 }
 
 kotlin {
@@ -26,7 +29,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            // Kermit
             implementation(libs.touchlab.kermit)
+
+            // Koim
+            implementation(libs.koin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -34,10 +41,33 @@ kotlin {
     }
 }
 
+val modulePackageName = "com.spotify.app.core_logger.shared"
+
+buildkonfig {
+    packageName = modulePackageName
+    exposeObjectWithName = "CoreLoggerBuildKonfig"
+
+    defaultConfigs {
+        buildConfigField(BOOLEAN, "DEBUG", "true")
+    }
+
+    defaultConfigs("debug") {
+        buildConfigField(BOOLEAN, "DEBUG", "true")
+    }
+
+    defaultConfigs("release") {
+        buildConfigField(BOOLEAN, "DEBUG", "false")
+    }
+}
+
 android {
-    namespace = "com.spotify.app.core_logger.shared"
+    namespace = modulePackageName
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdkVersion.get().toInt()
     }
+}
+
+task("testClasses").doLast {
+    println("This is a dummy testClasses task")
 }
