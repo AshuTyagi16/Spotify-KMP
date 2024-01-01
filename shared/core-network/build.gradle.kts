@@ -1,7 +1,11 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.com.android.library)
+    alias(libs.plugins.kotlin.serialization)
+    id(libs.plugins.build.konfig.get().toString())
 }
 
 kotlin {
@@ -38,6 +42,9 @@ kotlin {
 
             // Core-Logger Module
             implementation(project(":shared:core-logger"))
+
+            // Core-Preferences Module
+            implementation(project(":shared:core-preferences"))
         }
 
         commonTest.dependencies {
@@ -57,10 +64,26 @@ kotlin {
     }
 }
 
+val modulePackageName = "com.spotify.app.core_network.shared"
+
+buildkonfig {
+    packageName = modulePackageName
+     exposeObjectWithName = "CoreNetworkBuildKonfig"
+
+    defaultConfigs {
+        buildConfigField(STRING, "BASE_URL", "api.spotify.com")
+        buildConfigField(STRING, "BASE_URL_AUTH", "accounts.spotify.com")
+    }
+}
+
 android {
-    namespace = "com.spotify.app.core_network.shared"
+    namespace = modulePackageName
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdkVersion.get().toInt()
     }
+}
+
+task("testClasses").doLast {
+    println("This is a dummy testClasses task")
 }

@@ -5,5 +5,12 @@ plugins {
     alias(libs.plugins.com.android.library) apply false
     alias(libs.plugins.org.jetbrains.kotlin.android) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
+buildscript {
+    dependencies {
+        classpath(libs.build.konfig)
+    }
+}
+
 true // Needed to make the Suppress annotation work for the plugins block

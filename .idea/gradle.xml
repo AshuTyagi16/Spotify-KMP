@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/shared" />
             <option value="$PROJECT_DIR$/shared/core-logger" />
             <option value="$PROJECT_DIR$/shared/core-network" />
+            <option value="$PROJECT_DIR$/shared/core-preferences" />
           </set>
         </option>
       </GradleProjectSettings>
