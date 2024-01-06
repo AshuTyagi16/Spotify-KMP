@@ -42,7 +42,7 @@ abstract class BaseDataSource {
                 }
 
                 NetworkErrorCodes.REFRESH_TOKEN_EXPIRED -> {
-                    NetworkEventBus.invokeEvent(NetworkApiEvent.REFRESH_TOKEN_EXPIRED)
+                    NetworkEventBus.INSTANCE.invokeEvent(NetworkApiEvent.REFRESH_TOKEN_EXPIRED)
                     RestClientResult.error(
                         errorMessage = NetworkErrorMessages.PLEASE_LOGIN_AGAIN,
                         errorCode = statusCode

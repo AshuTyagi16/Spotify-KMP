@@ -21,6 +21,8 @@ ktor = "2.3.7"
 prferences = "1.1.1"
 build-konfig = "0.15.1"
 koin = "3.5.3"
+kmm-bridge = "0.5.1"
+skie = "0.6.1"
 
 [libraries]
 ## Core-Ktx
@@ -77,8 +79,11 @@ com-android-application = { id = "com.android.application", version.ref = "agp" 
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+org-jetbrains-kotlin-native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 build-konfig = { id = "com.codingfeline.buildkonfig" }
+kmm-bridge = { id = "co.touchlab.kmmbridge" , version.ref = "kmm-bridge" }
+skie = { id = "co.touchlab.skie", version.ref = "skie" }
 
 [bundles]
 ktor-android = [
