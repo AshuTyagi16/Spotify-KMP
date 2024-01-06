@@ -13,6 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+token.properties
 shared/build
 shared/core-logger/build
 shared/core-network/build

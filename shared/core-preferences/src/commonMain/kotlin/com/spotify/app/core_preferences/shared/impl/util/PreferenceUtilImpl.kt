@@ -13,9 +13,7 @@ class PreferenceUtilImpl constructor(
     override suspend fun setAccessToken(token: String) =
         preferenceApi.putString(PreferenceConstants.ACCESS_TOKEN, token)
 
-    override suspend fun getRefreshToken() =
-        preferenceApi.getString(PreferenceConstants.REFRESH_TOKEN)
-
-    override suspend fun setRefreshToken(token: String) =
-        preferenceApi.putString(PreferenceConstants.REFRESH_TOKEN, token)
+    override suspend fun clearAccessToken() {
+        preferenceApi.remove(PreferenceConstants.ACCESS_TOKEN)
+    }
 }

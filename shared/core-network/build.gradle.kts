@@ -1,6 +1,22 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
+fun readTokenProperties(): Map<String, String> {
+    val items = HashMap<String, String>()
+
+    val fl = rootProject.file("token.properties")
+
+    if (fl.exists()) {
+        fl.forEachLine {
+            items[it.split("=")[0]] = it.split("=")[1]
+        }
+    }
+
+    return items
+}
+
+val tokenProperties = readTokenProperties()
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -72,11 +88,13 @@ val modulePackageName = "com.spotify.app.core_network.shared"
 
 buildkonfig {
     packageName = modulePackageName
-     exposeObjectWithName = "CoreNetworkBuildKonfig"
+    exposeObjectWithName = "CoreNetworkBuildKonfig"
 
     defaultConfigs {
         buildConfigField(STRING, "BASE_URL", "api.spotify.com")
-        buildConfigField(STRING, "BASE_URL_AUTH", "accounts.spotify.com")
+        buildConfigField(STRING, "CLIENT_ID", tokenProperties["client_id"])
+        buildConfigField(STRING, "CLIENT_SECRET", tokenProperties["client_secret"])
+        buildConfigField(STRING, "GRANT_TYPE", tokenProperties["grant_type"])
         buildConfigField(BOOLEAN, "DEBUG", "true")
     }
 

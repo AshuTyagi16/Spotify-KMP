@@ -8,8 +8,8 @@ data class RefreshTokenRequest(
     @SerialName("grant_type")
     val grantType: String,
 
-    @SerialName("refresh_token")
-    val refreshToken: String,
+    @SerialName("client_secret")
+    val clientSecret: String,
 
     @SerialName("client_id")
     val clientId: String

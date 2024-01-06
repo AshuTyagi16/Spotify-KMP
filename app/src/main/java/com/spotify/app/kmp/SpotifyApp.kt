@@ -1,7 +1,6 @@
 package com.spotify.app.kmp
 
 import android.app.Application
-import com.spotify.app.core_network.shared.impl.HttpEngineProviderAndroid
 import com.spotify.app.shared.di.getSharedModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +13,7 @@ class SpotifyApp : Application() {
         startKoin {
             androidContext(this@SpotifyApp)
             androidLogger()
-            modules(getSharedModules(httpEngineProvider = HttpEngineProviderAndroid()))
+            modules(getSharedModules())
         }
     }
 

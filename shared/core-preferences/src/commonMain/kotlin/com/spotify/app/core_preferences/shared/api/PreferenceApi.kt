@@ -121,6 +121,11 @@ interface PreferenceApi {
     suspend fun putBoolean(key: String, value: Boolean)
 
     /**
+     * Function to remove the key & values in the preferences
+     * */
+    suspend fun remove(key: String)
+
+    /**
      * Function to clear all the values in the preferences
      * */
     suspend fun clearAll()

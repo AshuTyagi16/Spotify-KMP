@@ -2,16 +2,27 @@ package com.spotify.app.core_network.shared.impl.di
 
 import com.spotify.app.core_network.shared.CoreNetworkBuildKonfig
 import com.spotify.app.core_network.shared.impl.HttpClientApiImpl
-import com.spotify.app.core_network.shared.impl.HttpEngineProvider
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
-fun createNetworkModule(httpEngineProvider: HttpEngineProvider) = module {
+val networkModule = module {
     single {
         HttpClientApiImpl(
             shouldEnableLogging = CoreNetworkBuildKonfig.DEBUG,
-            httpEngineProvider = httpEngineProvider,
+            json = get(),
             loggerApi = get(),
             preferenceUtilApi = get()
         )
+    }
+    single {
+        Json {
+            ignoreUnknownKeys = true
+            prettyPrint = false
+            isLenient = true
+            useAlternativeNames = true
+            encodeDefaults = true
+            explicitNulls = false
+        }
     }
 }

@@ -3,6 +3,12 @@ package com.spotify.app.core_network.shared.impl
 import com.spotify.app.core_logger.shared.api.LoggerApi
 import com.spotify.app.core_network.shared.CoreNetworkBuildKonfig
 import com.spotify.app.core_network.shared.api.HttpClientApi
+import com.spotify.app.core_network.shared.impl.model.RefreshTokenRequest
+import com.spotify.app.core_network.shared.impl.model.RefreshTokenResponse
+import com.spotify.app.core_network.shared.impl.util.NetworkConstants.Endpoints
+import com.spotify.app.core_network.shared.impl.util.NetworkConstants.NetworkApiConfig
+import com.spotify.app.core_network.shared.impl.util.NetworkConstants.AuthHeader
+import com.spotify.app.core_preferences.shared.api.PreferenceUtilApi
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpTimeout
@@ -15,12 +21,8 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
-import com.spotify.app.core_network.shared.impl.util.NetworkConstants.Endpoints
-import com.spotify.app.core_network.shared.impl.model.RefreshTokenRequest
-import com.spotify.app.core_network.shared.impl.model.RefreshTokenResponse
-import com.spotify.app.core_preferences.shared.api.PreferenceUtilApi
-import io.ktor.client.request.host
-import io.ktor.client.request.post
+import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsText
@@ -29,32 +31,17 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 
 class HttpClientApiImpl(
     private val shouldEnableLogging: Boolean,
-    private val httpEngineProvider: HttpEngineProvider,
+    private val json: Json,
     private val loggerApi: LoggerApi,
     private val preferenceUtilApi: PreferenceUtilApi,
 ) : HttpClientApi {
 
-    companion object {
-        private const val SOCKET_TIMEOUT_MILLIS = 60_000L
-        private const val CONNECT_TIMEOUT_MILLIS = 60_000L
-        private const val REQUEST_TIMEOUT_MILLIS = 60_000L
-    }
-
-    @OptIn(ExperimentalSerializationApi::class)
-    private val json by lazy {
-        Json {
-            ignoreUnknownKeys = true
-            prettyPrint = false
-            isLenient = true
-            useAlternativeNames = true
-            encodeDefaults = true
-            explicitNulls = false
-        }
+    private val httpEngineProvider by lazy {
+        HttpEngineProvider()
     }
 
     override fun getHttpClient(): HttpClient {
@@ -68,53 +55,53 @@ class HttpClientApiImpl(
                     protocol = URLProtocol.HTTPS
                 }
                 contentType(ContentType.Application.Json)
+
+                //Access Token
+                val accessToken = runBlocking { preferenceUtilApi.getAccessToken() }
+                if (accessToken.isNullOrBlank().not()) {
+                    header(AuthHeader.AUTH_HEADER_KEY, AuthHeader.BEARER.plus(accessToken))
+                }
             }
 
             //Authenticator
             install(Auth) {
                 bearer {
-                    loadTokens {
-                        BearerTokens(
-                            accessToken = preferenceUtilApi.getAccessToken()!!,
-                            refreshToken = preferenceUtilApi.getRefreshToken()!!
-                        )
-                    }
                     refreshTokens {
-                        val refreshTokenResponse = client.post {
-                            host = CoreNetworkBuildKonfig.BASE_URL_AUTH
+                        val refreshTokenResponse = client.get {
                             url(Endpoints.REFRESH_TOKEN)
-                            contentType(ContentType.parse("application/x-www-form-urlencoded"))
+                            contentType(ContentType.Application.FormUrlEncoded)
                             setBody(
                                 RefreshTokenRequest(
-                                    grantType = "",
-                                    refreshToken = preferenceUtilApi.getRefreshToken()!!,
-                                    clientId = ""
+                                    grantType = CoreNetworkBuildKonfig.GRANT_TYPE,
+                                    clientId = CoreNetworkBuildKonfig.CLIENT_ID,
+                                    clientSecret = CoreNetworkBuildKonfig.CLIENT_SECRET
                                 )
                             )
                             markAsRefreshTokenRequest()
-                        }.body<RefreshTokenResponse>()
+                        }.body<RefreshTokenResponse?>()
 
-                        val accessToken = refreshTokenResponse.accessToken
-                        val refreshToken = refreshTokenResponse.refreshToken
+                        val accessToken = refreshTokenResponse?.accessToken
 
-                        runBlocking {
-                            preferenceUtilApi.setAccessToken(accessToken)
-                            preferenceUtilApi.setRefreshToken(refreshToken)
+                        if (accessToken.isNullOrBlank().not()) {
+                            runBlocking { preferenceUtilApi.setAccessToken(accessToken!!) }
+
+                            BearerTokens(
+                                accessToken = accessToken!!,
+                                refreshToken = accessToken!!
+                            )
+                        } else {
+                            runBlocking { preferenceUtilApi.clearAccessToken() }
+                            null
                         }
-
-                        BearerTokens(
-                            accessToken = accessToken,
-                            refreshToken = refreshToken
-                        )
                     }
                 }
             }
 
             //Timeout
             install(HttpTimeout) {
-                requestTimeoutMillis = REQUEST_TIMEOUT_MILLIS
-                socketTimeoutMillis = SOCKET_TIMEOUT_MILLIS
-                connectTimeoutMillis = CONNECT_TIMEOUT_MILLIS
+                requestTimeoutMillis = NetworkApiConfig.REQUEST_TIMEOUT_MILLIS
+                socketTimeoutMillis = NetworkApiConfig.SOCKET_TIMEOUT_MILLIS
+                connectTimeoutMillis = NetworkApiConfig.CONNECT_TIMEOUT_MILLIS
             }
 
             //Logging
@@ -122,7 +109,10 @@ class HttpClientApiImpl(
                 install(Logging) {
                     logger = object : Logger {
                         override fun log(message: String) {
-                            loggerApi.logD(message)
+                            loggerApi.logDWithTag(
+                                tag = NetworkApiConfig.DEFAULT_LOG_TAG,
+                                message = message
+                            )
                         }
                     }
                     level = LogLevel.ALL
@@ -133,7 +123,10 @@ class HttpClientApiImpl(
             if (shouldEnableLogging) {
                 install(ResponseObserver) {
                     onResponse {
-                        loggerApi.logD(it.bodyAsText())
+                        loggerApi.logDWithTag(
+                            tag = NetworkApiConfig.DEFAULT_LOG_TAG,
+                            message = it.bodyAsText()
+                        )
                     }
                 }
             }

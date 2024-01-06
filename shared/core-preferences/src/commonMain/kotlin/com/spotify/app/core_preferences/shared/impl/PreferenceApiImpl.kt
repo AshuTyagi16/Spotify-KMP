@@ -91,6 +91,10 @@ internal class PreferenceApiImpl(
         suspendSettings.putBoolean(key, value)
     }
 
+    override suspend fun remove(key: String) {
+        suspendSettings.remove(key)
+    }
+
     override suspend fun clearAll() {
         suspendSettings.clear()
     }

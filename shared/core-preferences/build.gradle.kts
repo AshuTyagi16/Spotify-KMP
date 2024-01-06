@@ -26,8 +26,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            // Multiplatform Preferences
             implementation(libs.bundles.multiplatform.preferences)
+
+            // Koin
             implementation(libs.koin)
+
+            // Coroutines
+            implementation(libs.coroutines.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

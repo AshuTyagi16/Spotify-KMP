@@ -55,9 +55,6 @@ dependencies {
     // Shared Module
     implementation(project(":shared"))
 
-    // Shared Core Network Module
-    implementation(project(":shared:core-network"))
-
     // Core Ktx
     implementation(libs.core.ktx)
 
