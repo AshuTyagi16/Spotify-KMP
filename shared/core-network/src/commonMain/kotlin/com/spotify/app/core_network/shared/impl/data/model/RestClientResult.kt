@@ -10,7 +10,8 @@ data class RestClientResult<out T>(
     enum class Status {
         SUCCESS,
         ERROR,
-        LOADING
+        LOADING,
+        IDLE
     }
 
     companion object {
@@ -20,6 +21,10 @@ data class RestClientResult<out T>(
 
         fun <T> loading(): RestClientResult<T> {
             return RestClientResult(Status.LOADING)
+        }
+
+        fun <T> idle(): RestClientResult<T> {
+            return RestClientResult(Status.IDLE)
         }
 
         fun <T> error(

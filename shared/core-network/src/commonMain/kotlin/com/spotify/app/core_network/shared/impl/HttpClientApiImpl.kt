@@ -3,11 +3,10 @@ package com.spotify.app.core_network.shared.impl
 import com.spotify.app.core_logger.shared.api.LoggerApi
 import com.spotify.app.core_network.shared.CoreNetworkBuildKonfig
 import com.spotify.app.core_network.shared.api.HttpClientApi
-import com.spotify.app.core_network.shared.impl.model.RefreshTokenRequest
 import com.spotify.app.core_network.shared.impl.model.RefreshTokenResponse
+import com.spotify.app.core_network.shared.impl.util.NetworkConstants.AuthHeader
 import com.spotify.app.core_network.shared.impl.util.NetworkConstants.Endpoints
 import com.spotify.app.core_network.shared.impl.util.NetworkConstants.NetworkApiConfig
-import com.spotify.app.core_network.shared.impl.util.NetworkConstants.AuthHeader
 import com.spotify.app.core_preferences.shared.api.PreferenceUtilApi
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -21,12 +20,15 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
-import io.ktor.client.request.get
+import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.header
+import io.ktor.client.request.host
+import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
+import io.ktor.http.Parameters
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
@@ -67,14 +69,16 @@ class HttpClientApiImpl(
             install(Auth) {
                 bearer {
                     refreshTokens {
-                        val refreshTokenResponse = client.get {
+                        val refreshTokenResponse = client.post {
+                            host = CoreNetworkBuildKonfig.BASE_URL_AUTH
                             url(Endpoints.REFRESH_TOKEN)
-                            contentType(ContentType.Application.FormUrlEncoded)
                             setBody(
-                                RefreshTokenRequest(
-                                    grantType = CoreNetworkBuildKonfig.GRANT_TYPE,
-                                    clientId = CoreNetworkBuildKonfig.CLIENT_ID,
-                                    clientSecret = CoreNetworkBuildKonfig.CLIENT_SECRET
+                                FormDataContent(
+                                    Parameters.build {
+                                        append("grant_type", CoreNetworkBuildKonfig.GRANT_TYPE)
+                                        append("client_id", CoreNetworkBuildKonfig.CLIENT_ID)
+                                        append("client_secret", CoreNetworkBuildKonfig.CLIENT_SECRET)
+                                    }
                                 )
                             )
                             markAsRefreshTokenRequest()

@@ -10,6 +10,9 @@ suspend inline fun <DTO, Domain> RestClientResult<DTO>.mapFromDTO(
     crossinline dataMapper: suspend (t: DTO?) -> Domain
 ): RestClientResult<Domain> {
     return when (status) {
+        RestClientResult.Status.IDLE -> {
+            RestClientResult.idle()
+        }
         RestClientResult.Status.LOADING -> {
             RestClientResult.loading()
         }
@@ -43,6 +46,10 @@ fun <T> Flow<StoreReadResponse<RestClientResult<T>>>.mapStoreResponseToRestClien
                     RestClientResult.Status.LOADING -> {
                         RestClientResult.loading()
                     }
+
+                    RestClientResult.Status.IDLE -> {
+                        RestClientResult.idle()
+                    }
                 }
             }
 
@@ -71,6 +78,9 @@ suspend fun <T> Flow<RestClientResult<T>>.collect(
 ) {
     this.collectLatest {
         when (it.status) {
+            RestClientResult.Status.IDLE -> {
+                // Do nothing
+            }
             RestClientResult.Status.LOADING -> {
                 onLoading.invoke()
             }

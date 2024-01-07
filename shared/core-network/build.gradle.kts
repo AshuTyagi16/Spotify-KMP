@@ -95,6 +95,7 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(STRING, "BASE_URL", "api.spotify.com")
+        buildConfigField(STRING, "BASE_URL_AUTH", "accounts.spotify.com")
         buildConfigField(STRING, "CLIENT_ID", tokenProperties["client_id"])
         buildConfigField(STRING, "CLIENT_SECRET", tokenProperties["client_secret"])
         buildConfigField(STRING, "GRANT_TYPE", tokenProperties["grant_type"])

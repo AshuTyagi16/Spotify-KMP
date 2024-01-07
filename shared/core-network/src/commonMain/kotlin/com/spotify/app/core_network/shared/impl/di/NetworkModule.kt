@@ -1,13 +1,15 @@
 package com.spotify.app.core_network.shared.impl.di
 
 import com.spotify.app.core_network.shared.CoreNetworkBuildKonfig
+import com.spotify.app.core_network.shared.api.HttpClientApi
 import com.spotify.app.core_network.shared.impl.HttpClientApiImpl
+import io.ktor.client.HttpClient
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
 val networkModule = module {
-    single {
+    single<HttpClientApi> {
         HttpClientApiImpl(
             shouldEnableLogging = CoreNetworkBuildKonfig.DEBUG,
             json = get(),
@@ -25,4 +27,11 @@ val networkModule = module {
             explicitNulls = false
         }
     }
+    single {
+        provideHttpClient(get())
+    }
+}
+
+private fun provideHttpClient(httpClientApi: HttpClientApi): HttpClient {
+    return httpClientApi.getHttpClient()
 }

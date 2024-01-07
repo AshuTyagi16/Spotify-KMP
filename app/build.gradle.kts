@@ -36,6 +36,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = libs.versions.jvmTargetVersion.get()
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
     buildFeatures {
         compose = true

@@ -7,6 +7,7 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/inspectionProfiles
 .DS_Store
 /build
 /captures
@@ -15,6 +16,8 @@
 local.properties
 token.properties
 shared/build
+shared/core-base/build
 shared/core-logger/build
 shared/core-network/build
 shared/core-preferences/build
+shared/feature-homepage/build

@@ -5,6 +5,7 @@ import com.spotify.app.feature_homepage.shared.data.repository.HomePageRepositor
 import com.spotify.app.feature_homepage.shared.domain.repository.HomePageRepositoryImpl
 import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedPlaylistsUseCase
 import com.spotify.app.feature_homepage.shared.domain.use_case.impl.FetchFeaturedPlaylistsUseCaseImpl
+import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
 import org.koin.dsl.module
 
 val featureHomePageModule = module {
@@ -17,4 +18,8 @@ val featureHomePageModule = module {
     single<FetchFeaturedPlaylistsUseCase> {
         FetchFeaturedPlaylistsUseCaseImpl(get())
     }
+    single {
+        HomePageViewModel(get(), scope = it.get())
+    }
+
 }
