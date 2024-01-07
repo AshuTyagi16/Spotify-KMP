@@ -23,6 +23,9 @@ build-konfig = "0.15.1"
 koin = "3.5.3"
 kmm-bridge = "0.5.1"
 skie = "0.6.1"
+kotlin-serialization = "1.6.2"
+store5 = "5.0.0"
+kotlin-atomicfu = "0.23.1"
 
 [libraries]
 ## Core-Ktx
@@ -57,6 +60,8 @@ ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
 
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+kotlin-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlin-atomicfu" }
 
 ## Coroutine
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -67,6 +72,8 @@ build-konfig = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugi
 
 koin = { module = "io.insert-koin:koin-core", version.ref = "koin"}
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
+
+store = { module = "org.mobilenativefoundation.store:store5", version.ref = "store5" }
 
 ## Testing
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -103,4 +110,8 @@ ktor-common = [
 multiplatform-preferences = [
     "multiplatform-settings",
     "multiplatform-settings-couroutine"
+]
+store = [
+    "store",
+    "kotlin-atomicfu"
 ]

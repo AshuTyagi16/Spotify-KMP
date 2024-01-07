@@ -39,6 +39,9 @@ kotlin {
 
             // Shared Core Logger Module
             api(project(":shared:core-logger"))
+
+            // Shared Feature HomePage Module
+            api(project(":shared:feature-homepage"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -61,6 +64,9 @@ kotlin {
 
             // Shared Core Logger Module
             export(project(":shared:core-logger"))
+
+            // Shared Feature HomePage Module
+            export(project(":shared:feature-homepage"))
 
             isStatic = true
 

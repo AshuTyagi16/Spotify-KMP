@@ -1,22 +1,6 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
-fun readTokenProperties(): Map<String, String> {
-    val items = HashMap<String, String>()
-
-    val fl = rootProject.file("token.properties")
-
-    if (fl.exists()) {
-        fl.forEachLine {
-            items[it.split("=")[0]] = it.split("=")[1]
-        }
-    }
-
-    return items
-}
-
-val tokenProperties = readTokenProperties()
-
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -55,10 +39,13 @@ kotlin {
             implementation(libs.coroutines.core)
 
             // Ktor
-            implementation(libs.bundles.ktor.common)
+            api(libs.bundles.ktor.common)
 
             // Koin
             implementation(libs.koin)
+
+            // Store5
+            implementation(libs.bundles.store)
 
             // Core-Logger Module
             implementation(project(":shared:core-logger"))
@@ -85,6 +72,22 @@ kotlin {
 }
 
 val modulePackageName = "com.spotify.app.core_network.shared"
+
+fun readTokenProperties(): Map<String, String> {
+    val items = HashMap<String, String>()
+
+    val fl = rootProject.file("token.properties")
+
+    if (fl.exists()) {
+        fl.forEachLine {
+            items[it.split("=")[0]] = it.split("=")[1]
+        }
+    }
+
+    return items
+}
+
+val tokenProperties = readTokenProperties()
 
 buildkonfig {
     packageName = modulePackageName
