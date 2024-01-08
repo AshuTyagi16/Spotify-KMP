@@ -1,4 +1,4 @@
-package com.spotify.app.feature_homepage.shared.data.dto
+package com.spotify.app.feature_homepage.shared.data.dto.playlist
 
 import com.spotify.app.core_base.shared.data.dto.ImageDTO
 import kotlinx.serialization.SerialName
@@ -19,11 +19,5 @@ data class PlaylistItemDTO(
     val name: String,
 
     @SerialName("tracks")
-    val tracks: TracksInfoDto,
-
-    @SerialName("type")
-    val type: String,
-
-    @SerialName("uri")
-    val uri: String
+    val tracks: TracksInfoDto
 )

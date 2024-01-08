@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
-import com.spotify.app.feature_homepage.shared.domain.model.FeaturedPlaylists
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.FeaturedPlaylists
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
 import com.spotify.app.kmp.ui.theme.SpotifyKMPTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,11 +41,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(
-    name: State<RestClientResult<FeaturedPlaylists?>>,
+    name: State<RestClientResult<List<PlaylistItem>>>,
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = "Hello ${name.value.status.name}!",
+        text = "Hello ${name.value.status.name}! :: data is ${name.value.data?.size}",
         modifier = modifier
     )
 }

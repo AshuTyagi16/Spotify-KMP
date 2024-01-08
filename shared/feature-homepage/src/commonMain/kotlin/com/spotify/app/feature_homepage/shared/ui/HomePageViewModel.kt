@@ -1,7 +1,8 @@
 package com.spotify.app.feature_homepage.shared.ui
 
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
-import com.spotify.app.feature_homepage.shared.domain.model.FeaturedPlaylists
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.FeaturedPlaylists
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
 import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedPlaylistsUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ class HomePageViewModel constructor(
 
     private val viewModelScope = scope ?: CoroutineScope(Dispatchers.Main)
 
-    val data = MutableStateFlow<RestClientResult<FeaturedPlaylists?>>(RestClientResult.idle())
+    val data = MutableStateFlow<RestClientResult<List<PlaylistItem>>>(RestClientResult.idle())
 
     fun fetchFeaturedPlaylists() {
         viewModelScope.launch {

@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kmm.bridge) apply false
     alias(libs.plugins.skie) apply false
+    alias(libs.plugins.sqldelight) apply false
 }
 buildscript {
     dependencies {

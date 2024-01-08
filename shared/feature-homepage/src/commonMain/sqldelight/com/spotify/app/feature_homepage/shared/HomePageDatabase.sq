@@ -1,0 +1,17 @@
+CREATE TABLE PlaylistItemEntitity(
+    id TEXT PRIMARY KEY NOT NULL,
+    description TEXT NOT NULL,
+    name TEXT NOT NULL,
+    image TEXT NOT NULL,
+    trackCount INTEGER NOT NULL
+);
+
+insertFeaturePlaylist:
+INSERT INTO PlaylistItemEntitity(id, description, name, image, trackCount)
+VALUES (?, ?, ?, ?, ?);
+
+fetchFeaturedPlaylists:
+SELECT * FROM PlaylistItemEntitity;
+
+deleteAllPlaylists:
+DELETE FROM PlaylistItemEntitity;

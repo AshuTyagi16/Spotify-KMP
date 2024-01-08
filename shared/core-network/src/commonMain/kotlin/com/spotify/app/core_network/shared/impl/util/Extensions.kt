@@ -13,6 +13,7 @@ suspend inline fun <DTO, Domain> RestClientResult<DTO>.mapFromDTO(
         RestClientResult.Status.IDLE -> {
             RestClientResult.idle()
         }
+
         RestClientResult.Status.LOADING -> {
             RestClientResult.loading()
         }
@@ -27,30 +28,55 @@ suspend inline fun <DTO, Domain> RestClientResult<DTO>.mapFromDTO(
     }
 }
 
-fun <T> Flow<StoreReadResponse<RestClientResult<T>>>.mapStoreResponseToRestClientResult(): Flow<RestClientResult<T?>> =
+//fun <T> Flow<StoreReadResponse<RestClientResult<T>>>.mapWrappedStoreResponseToRestClientResult(): Flow<RestClientResult<T>> =
+//    this.map {
+//        when (it) {
+//            is StoreReadResponse.Data -> {
+//                when (it.value.status) {
+//                    RestClientResult.Status.SUCCESS -> {
+//                        RestClientResult.success(it.value.data!!)
+//                    }
+//
+//                    RestClientResult.Status.ERROR -> {
+//                        RestClientResult.error(
+//                            errorMessage = it.value.errorMessage.orEmpty(),
+//                            errorCode = it.value.errorCode
+//                        )
+//                    }
+//
+//                    RestClientResult.Status.LOADING -> {
+//                        RestClientResult.loading()
+//                    }
+//
+//                    RestClientResult.Status.IDLE -> {
+//                        RestClientResult.idle()
+//                    }
+//                }
+//            }
+//
+//            is StoreReadResponse.Error.Exception -> {
+//                RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+//            }
+//
+//            is StoreReadResponse.Error.Message -> {
+//                RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+//            }
+//
+//            is StoreReadResponse.Loading -> {
+//                RestClientResult.loading()
+//            }
+//
+//            is StoreReadResponse.NoNewData -> {
+//                RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+//            }
+//        }
+//    }
+
+fun <T> Flow<StoreReadResponse<T>>.mapStoreResponseToRestClientResult(): Flow<RestClientResult<T>> =
     this.map {
         when (it) {
             is StoreReadResponse.Data -> {
-                when (it.value.status) {
-                    RestClientResult.Status.SUCCESS -> {
-                        RestClientResult.success(it.value.data)
-                    }
-
-                    RestClientResult.Status.ERROR -> {
-                        RestClientResult.error(
-                            errorMessage = it.value.errorMessage.orEmpty(),
-                            errorCode = it.value.errorCode
-                        )
-                    }
-
-                    RestClientResult.Status.LOADING -> {
-                        RestClientResult.loading()
-                    }
-
-                    RestClientResult.Status.IDLE -> {
-                        RestClientResult.idle()
-                    }
-                }
+                RestClientResult.success(it.value)
             }
 
             is StoreReadResponse.Error.Exception -> {
@@ -81,6 +107,7 @@ suspend fun <T> Flow<RestClientResult<T>>.collect(
             RestClientResult.Status.IDLE -> {
                 // Do nothing
             }
+
             RestClientResult.Status.LOADING -> {
                 onLoading.invoke()
             }

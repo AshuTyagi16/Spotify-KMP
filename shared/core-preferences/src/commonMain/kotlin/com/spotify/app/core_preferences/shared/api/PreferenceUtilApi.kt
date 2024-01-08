@@ -6,4 +6,8 @@ interface PreferenceUtilApi {
     suspend fun setAccessToken(token: String)
 
     suspend fun clearAccessToken()
+
+    suspend fun fetchPlaylistDataLastWrittenTimestamp(): Long?
+
+    suspend fun setPlaylistLastWrittenTimestamp(timestamp: Long)
 }

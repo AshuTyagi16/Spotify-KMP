@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -13,7 +14,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -34,15 +35,40 @@ kotlin {
             // Shared Core Network Module
             implementation(project(":shared:core-network"))
 
+            // Shared Core Preferences Module
+            implementation(project(":shared:core-preferences"))
+
+            // Shared Core Logger Module
+            implementation(project(":shared:core-logger"))
+
+            // Kermit (Needed here for Store5)
+            implementation(libs.touchlab.kermit)
+
             // Store5
             implementation(libs.bundles.store)
 
             // Koin
             implementation(libs.koin)
-            
+
+            // SqlDelight
+            implementation(libs.bundles.sqldelight.common)
+
+            // Kotlin Datetime
+            implementation(libs.kotlin.datetime)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        androidMain.dependencies {
+            // SqlDelight
+            implementation(libs.bundles.sqldelight.android)
+        }
+
+        iosMain.dependencies {
+            // SqlDelight
+            implementation(libs.bundles.sqldelight.native)
         }
     }
 }
@@ -55,4 +81,16 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdkVersion.get().toInt()
     }
+}
+
+sqldelight {
+    databases {
+        create("HomePageDatabase") {
+            packageName.set(modulePackageName)
+        }
+    }
+}
+
+task("testClasses").doLast {
+    println("This is a dummy testClasses task")
 }

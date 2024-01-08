@@ -1,12 +1,74 @@
 package com.spotify.app.feature_homepage.shared.domain.repository
 
-import com.spotify.app.feature_homepage.shared.data.network.HomePageDataSource
+import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
+import com.spotify.app.core_network.shared.impl.util.mapFromDTO
+import com.spotify.app.core_network.shared.impl.util.mapStoreResponseToRestClientResult
+import com.spotify.app.feature_homepage.shared.data.local.HomePageLocalDataSource
+import com.spotify.app.feature_homepage.shared.data.network.HomePageRemoteDataSource
 import com.spotify.app.feature_homepage.shared.data.repository.HomePageRepository
+import com.spotify.app.feature_homepage.shared.domain.mapper.playlist.FeaturePlaylistsDtoMapper
+import com.spotify.app.feature_homepage.shared.domain.mapper.playlist.PlaylistItemEntityMapper
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.FeaturedPlaylists
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
+import com.spotify.app.feature_homepage.shared.util.CacheExpirationUtil
+import com.spotify.app.feature_homepage.shared.util.FeatureHomePageConstants
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import org.mobilenativefoundation.store.store5.Fetcher
+import org.mobilenativefoundation.store.store5.MemoryPolicy
+import org.mobilenativefoundation.store.store5.SourceOfTruth
+import org.mobilenativefoundation.store.store5.StoreBuilder
+import org.mobilenativefoundation.store.store5.StoreReadRequest
 
-class HomePageRepositoryImpl(
-    private val homePageDataSource: HomePageDataSource
+internal class HomePageRepositoryImpl(
+    private val homePageRemoteDataSource: HomePageRemoteDataSource,
+    private val homePageLocalDataSource: HomePageLocalDataSource,
+    private val cacheExpirationUtil: CacheExpirationUtil
 ) : HomePageRepository {
 
-    override suspend fun fetchFeaturedPlaylists() = homePageDataSource.fetchFeaturedPlaylist()
+    companion object {
+        private const val FEATURED_PLAYLISTS_CACHE_KEY = "feature-playlists"
+    }
+
+    private val store =
+        StoreBuilder.from<String, RestClientResult<FeaturedPlaylists>, List<PlaylistItem>>(
+            fetcher = Fetcher.of {
+                homePageRemoteDataSource.fetchFeaturedPlaylist()
+                    .mapFromDTO { FeaturePlaylistsDtoMapper.asDomain(it!!) }
+            },
+            sourceOfTruth = SourceOfTruth.of(
+                reader = {
+                    homePageLocalDataSource.fetchFeaturedPlaylists()
+                        .map { it.map { PlaylistItemEntityMapper.asDomain(it) } }
+                },
+                writer = { _, input ->
+                    if (input.status == RestClientResult.Status.SUCCESS) {
+                        cacheExpirationUtil.setPlaylistWrittenTimestamp()
+                        homePageLocalDataSource.insertFeaturedPlaylists(input.data?.playlists?.items.orEmpty())
+                    }
+                }
+            )
+        )
+            .cachePolicy(
+                MemoryPolicy.builder<String, List<PlaylistItem>>()
+                    .setExpireAfterWrite(FeatureHomePageConstants.CACHE_EXPIRE_TIME)
+                    .build()
+            )
+            .build()
+
+    override suspend fun fetchFeaturedPlaylists(): Flow<RestClientResult<List<PlaylistItem>>> {
+        val isCacheExpired = cacheExpirationUtil.isPlaylistCacheExpired()
+        return store.stream(
+            StoreReadRequest.cached(
+                key = FEATURED_PLAYLISTS_CACHE_KEY,
+                refresh = isCacheExpired
+            )
+        )
+            .flowOn(Dispatchers.IO)
+            .mapStoreResponseToRestClientResult()
+    }
 
 }

@@ -26,6 +26,8 @@ skie = "0.6.1"
 kotlin-serialization = "1.6.2"
 store5 = "5.0.0"
 kotlin-atomicfu = "0.23.1"
+sqldelight = "2.0.1"
+kotlin-datetime = "0.5.0"
 
 [libraries]
 ## Core-Ktx
@@ -59,9 +61,11 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
 
+## Kotlin Libs
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 kotlin-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlin-atomicfu" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
 
 ## Coroutine
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -70,10 +74,20 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 build-konfig = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "build-konfig" }
 
-koin = { module = "io.insert-koin:koin-core", version.ref = "koin"}
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
+## Koin
+koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
+## Store5
 store = { module = "org.mobilenativefoundation.store:store5", version.ref = "store5" }
+
+## SqlDelight
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
+sqldelight-coroutines-extension = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 
 ## Testing
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -89,8 +103,9 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 org-jetbrains-kotlin-native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 build-konfig = { id = "com.codingfeline.buildkonfig" }
-kmm-bridge = { id = "co.touchlab.kmmbridge" , version.ref = "kmm-bridge" }
+kmm-bridge = { id = "co.touchlab.kmmbridge", version.ref = "kmm-bridge" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [bundles]
 ktor-android = [
@@ -114,4 +129,14 @@ multiplatform-preferences = [
 store = [
     "store",
     "kotlin-atomicfu"
+]
+sqldelight-common = [
+    "sqldelight-runtime",
+    "sqldelight-coroutines-extension"
+]
+sqldelight-android = [
+    "sqldelight-android-driver"
+]
+sqldelight-native = [
+    "sqldelight-native-driver"
 ]
