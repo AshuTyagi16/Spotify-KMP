@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomePageViewModel constructor(
-    private val featuredPlaylistsUseCase: FetchFeaturedPlaylistsUseCase,
+    private val fetchFeaturedPlaylistsUseCase: FetchFeaturedPlaylistsUseCase,
     scope: CoroutineScope?
 ) {
 
@@ -21,7 +21,7 @@ class HomePageViewModel constructor(
 
     fun fetchFeaturedPlaylists() {
         viewModelScope.launch {
-            featuredPlaylistsUseCase.fetchFeaturedPlaylists().collectLatest {
+            fetchFeaturedPlaylistsUseCase.invoke().collectLatest {
                 data.emit(it)
             }
         }
