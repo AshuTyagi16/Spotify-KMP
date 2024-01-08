@@ -30,7 +30,7 @@ val featureHomePageModule = module {
         FetchFeaturedPlaylistsUseCase(get<HomePageRepository>()::fetchFeaturedPlaylists)
     }
     single {
-        HomePageViewModel(get(), scope = it.get())
+        HomePageViewModel(get())
     }
 
 }

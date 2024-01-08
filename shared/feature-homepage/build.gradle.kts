@@ -30,7 +30,7 @@ kotlin {
         commonMain.dependencies {
 
             // Shared Core Base Module
-            implementation(project(":shared:core-base"))
+            api(project(":shared:core-base"))
 
             // Shared Core Network Module
             implementation(project(":shared:core-network"))
@@ -64,6 +64,9 @@ kotlin {
         androidMain.dependencies {
             // SqlDelight
             implementation(libs.bundles.sqldelight.android)
+
+            // Koin Android
+            implementation(libs.koin.android)
         }
 
         iosMain.dependencies {

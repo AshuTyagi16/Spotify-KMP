@@ -34,7 +34,8 @@ kotlin-datetime = "0.5.0"
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 
 ## Lifecycle-Ktx
-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-runtime-ktx" }
 
 ## Multiplatform preferences
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "prferences" }

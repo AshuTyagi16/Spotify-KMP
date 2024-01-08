@@ -32,6 +32,10 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+        androidMain.dependencies {
+            // ViewModel
+            api(libs.androidx.lifecycle.viewmodel)
+        }
     }
 }
 
