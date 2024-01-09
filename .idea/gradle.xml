@@ -12,15 +12,19 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/feature-homepage" />
+            <option value="$PROJECT_DIR$/feature-playlist-detail" />
             <option value="$PROJECT_DIR$/shared" />
             <option value="$PROJECT_DIR$/shared/core-base" />
             <option value="$PROJECT_DIR$/shared/core-logger" />
             <option value="$PROJECT_DIR$/shared/core-network" />
             <option value="$PROJECT_DIR$/shared/core-preferences" />
             <option value="$PROJECT_DIR$/shared/feature-homepage" />
+            <option value="$PROJECT_DIR$/shared/feature-playlist-detail" />
           </set>
         </option>
       </GradleProjectSettings>
     </option>
+    <option name="offlineMode" value="true" />
   </component>
 </project>

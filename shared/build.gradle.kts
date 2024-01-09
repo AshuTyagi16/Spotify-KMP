@@ -42,6 +42,9 @@ kotlin {
 
             // Shared Feature HomePage Module
             api(project(":shared:feature-homepage"))
+
+            // Shared Feature Playlist Detail Module
+            api(project(":shared:feature-playlist-detail"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -67,6 +70,9 @@ kotlin {
 
             // Shared Feature HomePage Module
             export(project(":shared:feature-homepage"))
+
+            // Shared Feature Playlist Detail Module
+            export(project(":shared:feature-playlist-detail"))
 
             isStatic = true
 

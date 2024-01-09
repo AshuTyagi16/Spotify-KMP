@@ -8,7 +8,7 @@ import com.spotify.app.feature_homepage.shared.domain.repository.HomePageReposit
 import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedAlbumsUseCase
 import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedPlaylistsUseCase
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
-import com.spotify.app.feature_homepage.shared.util.CacheExpirationUtil
+import com.spotify.app.core_base.shared.util.CacheExpirationUtil
 import org.koin.dsl.module
 
 val featureHomePageModule = module {

@@ -4,7 +4,7 @@ sealed class Screen(val route: String) {
 
     data object HomePage : Screen("home_page")
 
-    data object PlaylistTracks : Screen("playlist_tracks")
+    data object PlaylistDetail : Screen("playlist_detail")
 
     data object AlbumTracks : Screen("album_tracks")
 

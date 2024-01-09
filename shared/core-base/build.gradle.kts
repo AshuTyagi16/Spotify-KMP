@@ -13,7 +13,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,7 +27,18 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+
+            // Share Core Preference Module
+            api(project(":shared:core-preferences"))
+
+            // Kotlinx-Serialization
             api(libs.kotlin.serialization)
+
+            // Kotlin Datetime
+            implementation(libs.kotlin.datetime)
+
+            // Coroutine
+            implementation(libs.coroutines.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

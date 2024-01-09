@@ -1,7 +1,7 @@
 package com.spotify.app.feature_homepage.shared.domain.mapper.album
 
 import com.spotify.app.core_base.shared.domain.mapper.EntityMapper
-import com.spotify.app.feature_homepage.shared.domain.model.album.AlbumItem
+import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.featurehomepage.shared.AlbumItemEntity
 
 object AlbumItemEntityMapper : EntityMapper<AlbumItem, AlbumItemEntity> {

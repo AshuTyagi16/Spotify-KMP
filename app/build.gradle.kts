@@ -59,6 +59,9 @@ dependencies {
     // Feature HomePage Module
     implementation(project(":feature-homepage"))
 
+    // Feature Playlist Detail Module
+    implementation(project(":feature-playlist-detail"))
+
     // Shared Module
     implementation(project(":shared"))
 

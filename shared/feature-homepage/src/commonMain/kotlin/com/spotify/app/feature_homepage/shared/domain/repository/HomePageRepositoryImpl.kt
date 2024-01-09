@@ -10,11 +10,12 @@ import com.spotify.app.feature_homepage.shared.domain.mapper.album.AlbumItemEnti
 import com.spotify.app.feature_homepage.shared.domain.mapper.album.FeaturedAlbumDtoMapper
 import com.spotify.app.feature_homepage.shared.domain.mapper.playlist.FeaturePlaylistsDtoMapper
 import com.spotify.app.feature_homepage.shared.domain.mapper.playlist.PlaylistItemEntityMapper
-import com.spotify.app.feature_homepage.shared.domain.model.album.AlbumItem
+import com.spotify.app.core_base.shared.domain.model.AlbumItem
+import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.feature_homepage.shared.domain.model.album.FeaturedAlbums
 import com.spotify.app.feature_homepage.shared.domain.model.playlist.FeaturedPlaylists
 import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
-import com.spotify.app.feature_homepage.shared.util.CacheExpirationUtil
+import com.spotify.app.core_base.shared.util.CacheExpirationUtil
 import com.spotify.app.feature_homepage.shared.util.FeatureHomePageConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -59,7 +60,7 @@ internal class HomePageRepositoryImpl(
         )
             .cachePolicy(
                 MemoryPolicy.builder<String, List<PlaylistItem>>()
-                    .setExpireAfterWrite(FeatureHomePageConstants.CACHE_EXPIRE_TIME)
+                    .setExpireAfterWrite(BaseConstants.CACHE_EXPIRE_TIME)
                     .build()
             )
             .build()
@@ -85,7 +86,7 @@ internal class HomePageRepositoryImpl(
         )
             .cachePolicy(
                 MemoryPolicy.builder<String, List<AlbumItem>>()
-                    .setExpireAfterWrite(FeatureHomePageConstants.CACHE_EXPIRE_TIME)
+                    .setExpireAfterWrite(BaseConstants.CACHE_EXPIRE_TIME)
                     .build()
             )
             .build()

@@ -41,9 +41,6 @@ kotlin {
             // Shared Core Logger Module
             implementation(project(":shared:core-logger"))
 
-            // Kermit (Needed here for Store5)
-            implementation(libs.touchlab.kermit)
-
             // Store5
             implementation(libs.bundles.store)
 
@@ -52,9 +49,6 @@ kotlin {
 
             // SqlDelight
             implementation(libs.bundles.sqldelight.common)
-
-            // Kotlin Datetime
-            implementation(libs.kotlin.datetime)
 
         }
         commonTest.dependencies {

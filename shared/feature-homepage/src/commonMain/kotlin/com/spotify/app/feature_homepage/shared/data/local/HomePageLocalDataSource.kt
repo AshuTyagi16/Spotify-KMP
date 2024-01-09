@@ -3,7 +3,7 @@ package com.spotify.app.feature_homepage.shared.data.local
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.spotify.app.feature_homepage.shared.HomePageDatabase
-import com.spotify.app.feature_homepage.shared.domain.model.album.AlbumItem
+import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

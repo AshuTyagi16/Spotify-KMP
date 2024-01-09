@@ -1,6 +1,7 @@
 package com.spotify.app.feature_homepage.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,13 +29,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.spotify.app.feature_homepage.shared.domain.model.album.AlbumItem
-import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomePageComposable(viewModel: HomePageViewModel) {
+fun HomePageComposable(
+    viewModel: HomePageViewModel,
+    onPlaylistClick: (playlistId: String) -> Unit
+) {
     LaunchedEffect(viewModel) {
         launch {
             viewModel.fetchFeaturedPlaylists()
@@ -95,6 +97,9 @@ fun HomePageComposable(viewModel: HomePageViewModel) {
                                     .clip(RoundedCornerShape(8.dp))
                                     .width(200.dp)
                                     .height(200.dp)
+                                    .clickable {
+                                        onPlaylistClick.invoke(it.id)
+                                    }
                             )
 
                             Text(

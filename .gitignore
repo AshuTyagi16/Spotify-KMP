@@ -21,3 +21,4 @@ shared/core-logger/build
 shared/core-network/build
 shared/core-preferences/build
 shared/feature-homepage/build
+shared/feature-playlist-detail/build

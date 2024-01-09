@@ -1,6 +1,7 @@
 package com.spotify.app.feature_homepage.shared.domain.mapper.album
 
 import com.spotify.app.core_base.shared.data.base.DtoMapper
+import com.spotify.app.core_base.shared.domain.mapper.AlbumDtoMapper
 import com.spotify.app.feature_homepage.shared.data.dto.album.FeaturedAlbumsDTO
 import com.spotify.app.feature_homepage.shared.domain.model.album.FeaturedAlbums
 
