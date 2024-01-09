@@ -1,24 +1,18 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "com.spotify.app.kmp"
+    namespace = "com.spotify.app.feature_homepage"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        applicationId = "com.spotify.app.kmp"
         minSdk = libs.versions.minSdkVersion.get().toInt()
-        targetSdk = libs.versions.targetSdkVersion.get().toInt()
-        versionCode = libs.versions.appVersionCode.get().toInt()
-        versionName = libs.versions.appVersionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -47,20 +41,15 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
 
-    // Feature HomePage Module
-    implementation(project(":feature-homepage"))
+    // Shared Feature HomePage Module
+    implementation(project(":shared:feature-homepage"))
 
-    // Shared Module
-    implementation(project(":shared"))
+    // Coil (Image Loading)
+    implementation(libs.coil)
 
     // Core Ktx
     implementation(libs.core.ktx)
@@ -71,10 +60,6 @@ dependencies {
     // Koin
     implementation(libs.koin)
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
-
-    // Navigation Component
-    implementation(libs.navigation.compose)
 
     //Compose
     implementation(libs.activity.compose)
@@ -84,12 +69,8 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
 
-    //Testing
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
 }

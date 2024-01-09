@@ -33,7 +33,7 @@ kotlin {
             api(project(":shared:core-base"))
 
             // Shared Core Network Module
-            implementation(project(":shared:core-network"))
+            api(project(":shared:core-network"))
 
             // Shared Core Preferences Module
             implementation(project(":shared:core-preferences"))

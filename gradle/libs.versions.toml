@@ -1,9 +1,14 @@
 [versions]
 
+appVersionCode = "1"
+appVersionName = "1.0"
+
 minSdkVersion = "21"
 compileSdkVersion = "34"
 targetSdkVersion = "34"
+
 jvmTargetVersion = "1.8"
+
 kotlinCompilerExtensionVersion = "1.5.7"
 
 agp = "8.1.4"
@@ -28,6 +33,10 @@ store5 = "5.0.0"
 kotlin-atomicfu = "0.23.1"
 sqldelight = "2.0.1"
 kotlin-datetime = "0.5.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+coil = "2.5.0"
+navigation-component = "2.7.6"
 
 [libraries]
 ## Core-Ktx
@@ -78,9 +87,16 @@ build-konfig = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugi
 ## Koin
 koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 
 ## Store5
 store = { module = "org.mobilenativefoundation.store:store5", version.ref = "store5" }
+
+## Coil (Image Loading)
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+## Navigation Component
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-component"}
 
 ## SqlDelight
 sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
@@ -95,6 +111,8 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
