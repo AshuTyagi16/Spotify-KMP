@@ -21,8 +21,16 @@ internal class PreferenceUtilImpl constructor(
         return preferenceApi.getLong(PreferenceConstants.PLAYLIST_LAST_FETCHED_TIMESTAMP)
     }
 
-    override suspend fun setPlaylistLastWrittenTimestamp(timestamp: Long) {
+    override suspend fun setPlaylistDataLastWrittenTimestamp(timestamp: Long) {
         preferenceApi.putLong(PreferenceConstants.PLAYLIST_LAST_FETCHED_TIMESTAMP, timestamp)
+    }
+
+    override suspend fun fetchAlbumDataLastWrittenTimestamp(): Long? {
+        return preferenceApi.getLong(PreferenceConstants.ALBUM_LAST_FETCHED_TIMESTAMP)
+    }
+
+    override suspend fun setAlbumDataLastWrittenTimestamp(timestamp: Long) {
+        preferenceApi.putLong(PreferenceConstants.ALBUM_LAST_FETCHED_TIMESTAMP, timestamp)
     }
 
 }

@@ -9,5 +9,9 @@ interface PreferenceUtilApi {
 
     suspend fun fetchPlaylistDataLastWrittenTimestamp(): Long?
 
-    suspend fun setPlaylistLastWrittenTimestamp(timestamp: Long)
+    suspend fun setPlaylistDataLastWrittenTimestamp(timestamp: Long)
+
+    suspend fun fetchAlbumDataLastWrittenTimestamp(): Long?
+
+    suspend fun setAlbumDataLastWrittenTimestamp(timestamp: Long)
 }

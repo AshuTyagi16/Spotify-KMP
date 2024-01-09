@@ -6,12 +6,31 @@ CREATE TABLE PlaylistItemEntitity(
     trackCount INTEGER NOT NULL
 );
 
-insertFeaturePlaylist:
+insertFeaturedPlaylist:
 INSERT INTO PlaylistItemEntitity(id, description, name, image, trackCount)
 VALUES (?, ?, ?, ?, ?);
 
 fetchFeaturedPlaylists:
 SELECT * FROM PlaylistItemEntitity;
 
-deleteAllPlaylists:
+deleteAllFeaturedPlaylists:
 DELETE FROM PlaylistItemEntitity;
+
+CREATE TABLE AlbumItemEntity(
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    image TEXT NOT NULL,
+    trackCount INTEGER NOT NULL,
+    releaseDate TEXT NOT NULL,
+    artists TEXT NOT NULL
+);
+
+insertFeaturedAlbum:
+INSERT INTO AlbumItemEntity(id,name,image,trackCount, releaseDate, artists)
+VALUES(?,?,?,?,?,?);
+
+fetchFeaturedAlbums:
+SELECT * FROM AlbumItemEntity;
+
+deleteAllFeaturedAlbums:
+DELETE FROM AlbumItemEntity;

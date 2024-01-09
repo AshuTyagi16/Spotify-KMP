@@ -1,14 +1,9 @@
-package com.spotify.app.feature_homepage.shared.data.repository
+package com.spotify.app.feature_homepage.shared.domain.use_case
 
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
 import com.spotify.app.feature_homepage.shared.domain.model.album.AlbumItem
 import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
 import kotlinx.coroutines.flow.Flow
 
-internal interface HomePageRepository {
-
-    suspend fun fetchFeaturedPlaylists(): Flow<RestClientResult<List<PlaylistItem>>>
-
-    suspend fun fetchFeaturedAlbums(): Flow<RestClientResult<List<AlbumItem>>>
-
-}
+@Suppress("FUN_INTERFACE_WITH_SUSPEND_FUNCTION") // TODO: Remove once KTIJ-7642 is fixed
+fun interface FetchFeaturedAlbumsUseCase: suspend () ->Flow<RestClientResult<List<AlbumItem>>>

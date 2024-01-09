@@ -12,5 +12,5 @@ actual fun getHomePlatformModule(): Module = module {
     single<SqlDriver> {
         AndroidSqliteDriver(HomePageDatabase.Schema, get(), "homepage.db")
     }
-    viewModel { HomePageViewModel(get()) }
+    viewModel { HomePageViewModel(get(), get()) }
 }

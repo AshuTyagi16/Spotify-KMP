@@ -5,6 +5,7 @@ import com.spotify.app.feature_homepage.shared.data.local.HomePageLocalDataSourc
 import com.spotify.app.feature_homepage.shared.data.network.HomePageRemoteDataSource
 import com.spotify.app.feature_homepage.shared.data.repository.HomePageRepository
 import com.spotify.app.feature_homepage.shared.domain.repository.HomePageRepositoryImpl
+import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedAlbumsUseCase
 import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedPlaylistsUseCase
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
 import com.spotify.app.feature_homepage.shared.util.CacheExpirationUtil
@@ -30,7 +31,10 @@ val featureHomePageModule = module {
         FetchFeaturedPlaylistsUseCase(get<HomePageRepository>()::fetchFeaturedPlaylists)
     }
     single {
-        HomePageViewModel(get())
+        FetchFeaturedAlbumsUseCase(get<HomePageRepository>()::fetchFeaturedAlbums)
+    }
+    single {
+        HomePageViewModel(get(), get())
     }
 
 }
