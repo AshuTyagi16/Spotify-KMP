@@ -27,7 +27,7 @@ internal class PlaylistDetailPagingSource(
         )
         val result = playlistDetailRepository.fetchPlaylistDetail(key)
         return if (result.status == RestClientResult.Status.SUCCESS) {
-            val list = result.data?.items.orEmpty()
+            val list = result.data.orEmpty()
             LoadResult.Page(
                 data = list,
                 prevKey = if (key.offset <= 0) {
@@ -39,7 +39,7 @@ internal class PlaylistDetailPagingSource(
                         offset = key.offset - key.limit
                     )
                 },
-                nextKey = if ((result.data?.total ?: 0) > key.offset + key.limit) {
+                nextKey = if ((result.data?.firstOrNull()?.totalItemCount ?: 0) > key.offset + key.limit) {
                     FetchPlaylistDetailRequest(
                         playlistId = key.playlistId,
                         limit = key.limit,

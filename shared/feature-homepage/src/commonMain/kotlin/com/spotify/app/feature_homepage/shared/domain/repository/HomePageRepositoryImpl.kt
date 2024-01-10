@@ -9,13 +9,9 @@ import com.spotify.app.core_network.shared.impl.util.mapFromDTO
 import com.spotify.app.feature_homepage.shared.data.local.HomePageLocalDataSource
 import com.spotify.app.feature_homepage.shared.data.network.HomePageRemoteDataSource
 import com.spotify.app.feature_homepage.shared.data.repository.HomePageRepository
-import com.spotify.app.feature_homepage.shared.domain.mapper.album.AlbumItemEntityMapper
-import com.spotify.app.feature_homepage.shared.domain.mapper.album.FeaturedAlbumDtoMapper
-import com.spotify.app.feature_homepage.shared.domain.mapper.playlist.FeaturePlaylistsDtoMapper
-import com.spotify.app.feature_homepage.shared.domain.mapper.playlist.PlaylistItemEntityMapper
-import com.spotify.app.feature_homepage.shared.domain.model.album.FeaturedAlbums
-import com.spotify.app.feature_homepage.shared.domain.model.playlist.FeaturedPlaylists
 import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
+import com.spotify.app.feature_homepage.shared.util.toAlbumItemList
+import com.spotify.app.feature_homepage.shared.util.toPlaylistItemList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
@@ -40,10 +36,12 @@ internal class HomePageRepositoryImpl(
     }
 
     private val featurePlaylistStore =
-        StoreBuilder.from<String, RestClientResult<FeaturedPlaylists>, RestClientResult<List<PlaylistItem>>>(
+        StoreBuilder.from<String, RestClientResult<List<PlaylistItem>>, RestClientResult<List<PlaylistItem>>>(
             fetcher = Fetcher.of {
                 val result = homePageRemoteDataSource.fetchFeaturedPlaylist()
-                    .mapFromDTO { FeaturePlaylistsDtoMapper.asDomain(it!!) }
+                    .mapFromDTO {
+                        it?.toPlaylistItemList().orEmpty()
+                    }
                 if (result.status == RestClientResult.Status.SUCCESS) {
                     result
                 } else {
@@ -56,17 +54,13 @@ internal class HomePageRepositoryImpl(
                 reader = {
                     homePageLocalDataSource.fetchFeaturedPlaylists()
                         .map {
-                            RestClientResult.success(it.map {
-                                PlaylistItemEntityMapper.asDomain(
-                                    it
-                                )
-                            })
+                            RestClientResult.success(it.toPlaylistItemList())
                         }
                 },
                 writer = { _, input ->
                     if (input.status == RestClientResult.Status.SUCCESS) {
                         cacheExpirationUtil.setPlaylistWrittenTimestamp()
-                        homePageLocalDataSource.insertFeaturedPlaylists(input.data?.playlists?.items.orEmpty())
+                        homePageLocalDataSource.insertFeaturedPlaylists(input.data.orEmpty())
                     }
                 }
             )
@@ -79,10 +73,12 @@ internal class HomePageRepositoryImpl(
             .build()
 
     private val featuredAlbumStore =
-        StoreBuilder.from<String, RestClientResult<FeaturedAlbums>, RestClientResult<List<AlbumItem>>>(
+        StoreBuilder.from<String, RestClientResult<List<AlbumItem>>, RestClientResult<List<AlbumItem>>>(
             fetcher = Fetcher.of {
                 val result = homePageRemoteDataSource.fetchFeaturedAlbums()
-                    .mapFromDTO { FeaturedAlbumDtoMapper.asDomain(it!!) }
+                    .mapFromDTO {
+                        it?.toAlbumItemList().orEmpty()
+                    }
                 if (result.status == RestClientResult.Status.SUCCESS) {
                     result
                 } else {
@@ -95,13 +91,13 @@ internal class HomePageRepositoryImpl(
                 reader = {
                     homePageLocalDataSource.fetchFeaturedAlbums()
                         .map {
-                            RestClientResult.success(it.map { AlbumItemEntityMapper.asDomain(it) })
+                            RestClientResult.success(it.toAlbumItemList())
                         }
                 },
                 writer = { _, input ->
                     if (input.status == RestClientResult.Status.SUCCESS) {
                         cacheExpirationUtil.setAlbumWrittenTimestamp()
-                        homePageLocalDataSource.insertFeaturedAlbums(input.data?.albums?.items.orEmpty())
+                        homePageLocalDataSource.insertFeaturedAlbums(input.data.orEmpty())
                     }
                 }
             )

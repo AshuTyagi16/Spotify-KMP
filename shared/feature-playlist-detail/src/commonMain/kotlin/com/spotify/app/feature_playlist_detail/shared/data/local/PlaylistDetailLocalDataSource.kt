@@ -15,21 +15,20 @@ internal class PlaylistDetailLocalDataSource(database: PlaylistDetailDatabase) {
 
     suspend fun insertPlaylistDetail(
         fetchPlaylistDetailRequest: FetchPlaylistDetailRequest,
-        totalItemCount: Long,
         playlistDetailItems: List<PlaylistDetailItem>
     ) =
         withContext(Dispatchers.IO) {
             dbQuery.transaction {
                 playlistDetailItems.forEach {
                     dbQuery.insertPlaylstDetailItem(
-                        id = it.track.id,
-                        artists = it.track.album.artists,
+                        id = it.id,
+                        artists = it.artists,
                         playlistId = fetchPlaylistDetailRequest.playlistId,
-                        trackName = it.track.name,
-                        image = it.track.album.image,
+                        trackName = it.trackName,
+                        image = it.image,
                         limitValue = fetchPlaylistDetailRequest.limit,
                         offsetValue = fetchPlaylistDetailRequest.offset,
-                        total = totalItemCount
+                        total = it.totalItemCount
                     )
                 }
             }

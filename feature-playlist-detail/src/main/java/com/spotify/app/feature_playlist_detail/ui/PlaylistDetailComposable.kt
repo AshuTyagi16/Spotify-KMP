@@ -58,15 +58,15 @@ fun PlaylistDetailComposable(
         ) {
             items(
                 count = data.itemCount,
-                key = data.itemKey { it.track.id },
+                key = data.itemKey { it.id },
             ) {
                 Row(
                     modifier = Modifier
                         .padding(vertical = 5.dp)
                 ) {
                     AsyncImage(
-                        model = data[it]?.track?.album?.image,
-                        contentDescription = data[it]?.track?.name,
+                        model = data[it]?.image,
+                        contentDescription = data[it]?.trackName,
                         modifier = Modifier
                             .clip(RoundedCornerShape(4.dp))
                             .width(50.dp)
@@ -80,7 +80,7 @@ fun PlaylistDetailComposable(
                             .height(50.dp)
                     ) {
                         Text(
-                            text = "${it + 1} - ${data[it]?.track?.name.orEmpty()}",
+                            text = "${it + 1} - ${data[it]?.trackName}",
                             color = Color.White,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 14.sp,
@@ -91,7 +91,7 @@ fun PlaylistDetailComposable(
                         )
 
                         Text(
-                            text = data[it]?.track?.album?.artists.orEmpty(),
+                            text = data[it]?.artists.orEmpty(),
                             color = Color.White.copy(alpha = 0.8f),
                             fontWeight = FontWeight.Light,
                             fontSize = 12.sp,

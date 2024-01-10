@@ -8,10 +8,9 @@ import com.spotify.app.core_network.shared.impl.util.mapFromDTO
 import com.spotify.app.feature_playlist_detail.shared.data.local.PlaylistDetailLocalDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailRemoteDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.repository.PlaylistDetailRepository
-import com.spotify.app.feature_playlist_detail.shared.domain.mapper.PlaylistDetailDtoMapper
-import com.spotify.app.feature_playlist_detail.shared.domain.mapper.PlaylistDetailItemEntityMapper
 import com.spotify.app.feature_playlist_detail.shared.domain.model.FetchPlaylistDetailRequest
-import com.spotify.app.feature_playlist_detail.shared.domain.model.PlaylistDetail
+import com.spotify.app.feature_playlist_detail.shared.domain.model.PlaylistDetailItem
+import com.spotify.app.feature_playlist_detail.shared.util.toPlaylistDetailItemList
 import kotlinx.coroutines.flow.map
 import org.mobilenativefoundation.store.store5.Fetcher
 import org.mobilenativefoundation.store.store5.MemoryPolicy
@@ -27,16 +26,15 @@ internal class PlaylistDetailRepositoryImpl(
 ) : PlaylistDetailRepository {
 
     private val store =
-        StoreBuilder.from<FetchPlaylistDetailRequest, RestClientResult<PlaylistDetail>, RestClientResult<PlaylistDetail>>(
-            fetcher = Fetcher.of {
-                val playlistDetailDtoMapper = PlaylistDetailDtoMapper(it)
+        StoreBuilder.from<FetchPlaylistDetailRequest, RestClientResult<List<PlaylistDetailItem>>, RestClientResult<List<PlaylistDetailItem>>>(
+            fetcher = Fetcher.of { key ->
                 val result = playlistDetailRemoteDataSource.fetchPlaylistDetail(
-                    playlistId = it.playlistId,
-                    limit = it.limit,
-                    offset = it.offset
+                    playlistId = key.playlistId,
+                    limit = key.limit,
+                    offset = key.offset
                 )
-                    .mapFromDTO {
-                        playlistDetailDtoMapper.asDomain(it!!)
+                    .mapFromDTO { playlistDetail ->
+                        playlistDetail?.toPlaylistDetailItemList(key).orEmpty()
                     }
                 if (result.status == RestClientResult.Status.SUCCESS) {
                     result
@@ -51,14 +49,7 @@ internal class PlaylistDetailRepositoryImpl(
                         limit = key.limit,
                         offset = key.offset
                     ).map {
-                        RestClientResult.success(
-                            PlaylistDetail(
-                                items = it.map { PlaylistDetailItemEntityMapper.asDomain(it) },
-                                limit = it.first().limitValue,
-                                offset = it.first().offsetValue,
-                                total = it.first().total
-                            )
-                        )
+                        RestClientResult.success(it.toPlaylistDetailItemList())
                     }
                 },
                 writer = { key, input ->
@@ -69,8 +60,7 @@ internal class PlaylistDetailRepositoryImpl(
                             offset = key.offset
                         )
                         playlistDetailLocalDataSource.insertPlaylistDetail(
-                            playlistDetailItems = input.data?.items.orEmpty(),
-                            totalItemCount = input.data?.total ?: 0L,
+                            playlistDetailItems = input.data.orEmpty(),
                             fetchPlaylistDetailRequest = key
                         )
                     }
@@ -78,7 +68,7 @@ internal class PlaylistDetailRepositoryImpl(
             )
         )
             .cachePolicy(
-                MemoryPolicy.builder<FetchPlaylistDetailRequest, RestClientResult<PlaylistDetail>>()
+                MemoryPolicy.builder<FetchPlaylistDetailRequest, RestClientResult<List<PlaylistDetailItem>>>()
                     .setExpireAfterWrite(BaseConstants.CACHE_EXPIRE_TIME)
                     .build()
             )
@@ -86,7 +76,7 @@ internal class PlaylistDetailRepositoryImpl(
 
     override suspend fun fetchPlaylistDetail(
         fetchPlaylistDetailRequest: FetchPlaylistDetailRequest
-    ): RestClientResult<PlaylistDetail> {
+    ): RestClientResult<List<PlaylistDetailItem>> {
         val isCacheExpired = cacheExpirationUtil.isPlaylistDetailCacheExpired(
             playlistId = fetchPlaylistDetailRequest.playlistId,
             limit = fetchPlaylistDetailRequest.limit,
