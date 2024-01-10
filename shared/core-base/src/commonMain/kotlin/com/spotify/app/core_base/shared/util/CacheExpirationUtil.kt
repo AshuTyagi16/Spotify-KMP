@@ -33,6 +33,27 @@ class CacheExpirationUtil(
         preferenceUtilApi.setAlbumDataLastWrittenTimestamp(Clock.System.now().toEpochMilliseconds())
     }
 
+    suspend fun isPlaylistDetailCacheExpired(
+        playlistId: String,
+        limit: Long,
+        offset: Long
+    ): Boolean = withContext(Dispatchers.IO) {
+        val lastWrittenTimestampInMillis =
+            preferenceUtilApi.fetchPlaylistDetailLastWrittenTimestamp(playlistId, limit, offset)
+        isCacheExpired(lastWrittenTimestampInMillis)
+    }
+
+    suspend fun setPlaylistDetailLastWrittenTimestamp(
+        playlistId: String,
+        limit: Long,
+        offset: Long
+    ) = withContext(Dispatchers.IO) {
+        preferenceUtilApi.setPlaylistDetailLastWrittenTimestamp(
+            playlistId, limit, offset,
+            Clock.System.now().toEpochMilliseconds()
+        )
+    }
+
     private fun isCacheExpired(lastWrittenTimestampInMillis: Long?): Boolean {
         return if (lastWrittenTimestampInMillis != null) {
             val currentTimestamp = Clock.System.now()

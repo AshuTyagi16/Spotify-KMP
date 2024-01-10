@@ -9,11 +9,13 @@ import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedAlbu
 import com.spotify.app.feature_homepage.shared.domain.use_case.FetchFeaturedPlaylistsUseCase
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
 import com.spotify.app.core_base.shared.util.CacheExpirationUtil
+import com.spotify.app.feature_homepage.shared.util.FeatureHomePageConstants
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val featureHomePageModule = module {
     single {
-        HomePageDatabase(get())
+        HomePageDatabase(get(named(FeatureHomePageConstants.QUALIFIER_HOMEPAGE_DATABASE)))
     }
     single {
         HomePageLocalDataSource(get())

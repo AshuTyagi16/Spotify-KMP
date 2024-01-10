@@ -9,11 +9,11 @@ data class PlaylistDetailDTO(
     val items: List<PlaylistDetailItemDTO>,
 
     @SerialName("limit")
-    val limit: Int,
+    val limit: Long,
 
     @SerialName("offset")
-    val offset: Int,
+    val offset: Long,
 
     @SerialName("total")
-    val total: Int
+    val total: Long
 )

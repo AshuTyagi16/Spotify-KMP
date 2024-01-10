@@ -52,6 +52,9 @@ dependencies {
     // Coil (Image Loading)
     implementation(libs.coil)
 
+    // Paging compose
+    implementation(libs.paging.compose)
+
     // Core Ktx
     implementation(libs.core.ktx)
 

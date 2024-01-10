@@ -33,4 +33,31 @@ internal class PreferenceUtilImpl constructor(
         preferenceApi.putLong(PreferenceConstants.ALBUM_LAST_FETCHED_TIMESTAMP, timestamp)
     }
 
+    override suspend fun fetchPlaylistDetailLastWrittenTimestamp(
+        playlistId: String,
+        limit: Long,
+        offset: Long
+    ): Long? {
+        val key = getKeyForPlaylistDetail(playlistId, limit, offset)
+        return preferenceApi.getLong(key)
+    }
+
+    override suspend fun setPlaylistDetailLastWrittenTimestamp(
+        playlistId: String,
+        limit: Long,
+        offset: Long,
+        timestamp: Long
+    ) {
+        val key = getKeyForPlaylistDetail(playlistId, limit, offset)
+        preferenceApi.putLong(key, timestamp)
+    }
+
+    private fun getKeyForPlaylistDetail(
+        playlistId: String,
+        limit: Long,
+        offset: Long
+    ): String {
+        return "$playlistId-$limit-$offset"
+    }
+
 }

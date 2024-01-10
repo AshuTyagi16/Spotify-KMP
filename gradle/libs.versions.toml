@@ -38,6 +38,7 @@ material = "1.11.0"
 coil = "2.5.0"
 navigation-component = "2.7.6"
 ktlint-gradle = "12.1.0"
+paging = "3.3.0-alpha02"
 
 [libraries]
 ## Core-Ktx
@@ -50,6 +51,10 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 ## Multiplatform preferences
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "prferences" }
 multiplatform-settings-couroutine = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "prferences" }
+
+## Paging
+paging = { module = "androidx.paging:paging-common", version.ref = "paging" }
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 
 ## Compose
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
@@ -97,7 +102,7 @@ store = { module = "org.mobilenativefoundation.store:store5", version.ref = "sto
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 ## Navigation Component
-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-component"}
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-component" }
 
 ## SqlDelight
 sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }

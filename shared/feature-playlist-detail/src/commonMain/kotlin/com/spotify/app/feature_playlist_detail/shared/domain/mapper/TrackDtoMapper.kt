@@ -2,6 +2,7 @@ package com.spotify.app.feature_playlist_detail.shared.domain.mapper
 
 import com.spotify.app.core_base.shared.data.base.DtoMapper
 import com.spotify.app.core_base.shared.domain.mapper.AlbumDtoMapper
+import com.spotify.app.core_base.shared.domain.mapper.AlbumItemDtoMapper
 import com.spotify.app.feature_playlist_detail.shared.data.dto.TrackDTO
 import com.spotify.app.feature_playlist_detail.shared.domain.model.Track
 
@@ -17,7 +18,7 @@ object TrackDtoMapper : DtoMapper<Track, TrackDTO> {
             episode = domain.episode,
             explicit = domain.explicit,
             trackNumber = domain.trackNumber,
-            album = AlbumDtoMapper.asDto(domain.album)
+            album = AlbumItemDtoMapper.asDto(domain.album)
         )
     }
 
@@ -32,7 +33,7 @@ object TrackDtoMapper : DtoMapper<Track, TrackDTO> {
             episode = dto.episode,
             explicit = dto.explicit,
             trackNumber = dto.trackNumber,
-            album = AlbumDtoMapper.asDomain(dto.album)
+            album = AlbumItemDtoMapper.asDomain(dto.album)
         )
     }
 

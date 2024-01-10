@@ -6,14 +6,14 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.url
 
-internal class PlaylistDetailDataSource(
+internal class PlaylistDetailRemoteDataSource(
     private val client: HttpClient
 ) : BaseDataSource() {
 
     suspend fun fetchPlaylistDetail(
         playlistId: String,
-        limit: Int,
-        offset: Int
+        limit: Long,
+        offset: Long
     ) = getResult<PlaylistDetailDTO> {
         client.get {
             url("v1/playlists/$playlistId/tracks?limit=$limit&offset=$offset")

@@ -1,6 +1,6 @@
 package com.spotify.app.feature_playlist_detail.shared.data.dto
 
-import com.spotify.app.core_base.shared.data.dto.AlbumDTO
+import com.spotify.app.core_base.shared.data.dto.AlbumItemDTO
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,7 +17,7 @@ data class TrackDTO(
     val popularity: Int,
 
     @SerialName("preview_url")
-    val previewUrl: String,
+    val previewUrl: String? = null,
 
     @SerialName("track")
     val track: Boolean,
@@ -35,5 +35,5 @@ data class TrackDTO(
     val trackNumber: Int,
 
     @SerialName("album")
-    val album: AlbumDTO
+    val album: AlbumItemDTO
 )

@@ -14,4 +14,17 @@ interface PreferenceUtilApi {
     suspend fun fetchAlbumDataLastWrittenTimestamp(): Long?
 
     suspend fun setAlbumDataLastWrittenTimestamp(timestamp: Long)
+
+    suspend fun fetchPlaylistDetailLastWrittenTimestamp(
+        playlistId: String,
+        limit: Long,
+        offset: Long
+    ): Long?
+
+    suspend fun setPlaylistDetailLastWrittenTimestamp(
+        playlistId: String,
+        limit: Long,
+        offset: Long,
+        timestamp: Long
+    )
 }

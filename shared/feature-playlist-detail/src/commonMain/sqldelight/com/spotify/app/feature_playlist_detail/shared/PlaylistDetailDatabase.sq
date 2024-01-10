@@ -1,0 +1,24 @@
+CREATE TABLE PlaylistDetailItemEntity(
+    id TEXT NOT NULL,
+    playlistId TEXT NOT NULL,
+    trackName TEXT NOT NULL,
+    artists TEXT NOT NULL,
+    image TEXT NOT NULL,
+    limitValue INTEGER NOT NULL,
+    offsetValue INTEGER NOT NULL,
+    total INTEGER NOT NULL,
+    PRIMARY KEY (id, playlistId)
+);
+
+insertPlaylstDetailItem:
+INSERT OR REPLACE INTO PlaylistDetailItemEntity(id,playlistId,trackName, artists, image,limitValue,offsetValue, total)
+VALUES (?,?,?,?,?,?,?,?);
+
+fetchPlaylistDetailItem:
+SELECT * FROM PlaylistDetailItemEntity WHERE playlistId = ? AND limitValue = ? AND offsetValue = ?;
+
+deleteAllPlaylistDetailItem:
+DELETE FROM PlaylistDetailItemEntity WHERE playlistId = ?;
+
+fetchTotalItemCountForPlaylist:
+SELECT COUNT(*) FROM PlaylistDetailItemEntity WHERE  playlistId = ?;

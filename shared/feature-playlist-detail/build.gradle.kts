@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -47,23 +48,51 @@ kotlin {
             // Koin
             implementation(libs.koin)
 
+            // Paging
+            implementation(libs.paging)
+
+            // SqlDelight
+            implementation(libs.bundles.sqldelight.common)
 
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
 
         androidMain.dependencies {
+            // SqlDelight
+            implementation(libs.bundles.sqldelight.android)
+
             // Koin Android
             implementation(libs.koin.android)
+        }
+
+        iosMain.dependencies {
+            // SqlDelight
+            implementation(libs.bundles.sqldelight.native)
         }
     }
 }
 
+val modulePackageName = "com.spotify.app.feature_playlist_detail.shared"
+
 android {
-    namespace = "com.spotify.app.feature_playlist_detail.shared"
+    namespace = modulePackageName
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdkVersion.get().toInt()
     }
+}
+
+sqldelight {
+    databases {
+        create("PlaylistDetailDatabase") {
+            packageName.set(modulePackageName)
+        }
+    }
+}
+
+task("testClasses").doLast {
+    println("This is a dummy testClasses task")
 }
