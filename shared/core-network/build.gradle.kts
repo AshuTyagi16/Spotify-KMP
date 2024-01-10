@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ktlint)
     id(libs.plugins.build.konfig.get().toString())
 }
 

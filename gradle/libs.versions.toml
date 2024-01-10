@@ -37,6 +37,7 @@ appcompat = "1.6.1"
 material = "1.11.0"
 coil = "2.5.0"
 navigation-component = "2.7.6"
+ktlint-gradle = "12.1.0"
 
 [libraries]
 ## Core-Ktx
@@ -125,6 +126,7 @@ build-konfig = { id = "com.codingfeline.buildkonfig" }
 kmm-bridge = { id = "co.touchlab.kmmbridge", version.ref = "kmm-bridge" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 
 [bundles]
 ktor-android = [

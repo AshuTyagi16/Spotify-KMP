@@ -4,6 +4,7 @@ import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.com.android.library)
+    alias(libs.plugins.ktlint)
     id(libs.plugins.build.konfig.get().toString())
 }
 

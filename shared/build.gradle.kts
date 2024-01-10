@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kmm.bridge)
     alias(libs.plugins.skie)
+    alias(libs.plugins.ktlint)
     `maven-publish`
 }
 

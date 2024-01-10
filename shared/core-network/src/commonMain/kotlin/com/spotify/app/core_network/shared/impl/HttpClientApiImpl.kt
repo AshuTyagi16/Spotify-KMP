@@ -72,6 +72,7 @@ class HttpClientApiImpl(
                         val refreshTokenResponse = client.post {
                             host = CoreNetworkBuildKonfig.BASE_URL_AUTH
                             url(Endpoints.REFRESH_TOKEN)
+                            headers.remove(AuthHeader.AUTH_HEADER_KEY)
                             setBody(
                                 FormDataContent(
                                     Parameters.build {
