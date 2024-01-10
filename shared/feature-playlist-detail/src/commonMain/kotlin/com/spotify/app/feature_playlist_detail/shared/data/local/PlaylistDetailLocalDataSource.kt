@@ -1,4 +1,4 @@
-package com.spotify.app.feature_playlist_detail.shared.data.network
+package com.spotify.app.feature_playlist_detail.shared.data.local
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList

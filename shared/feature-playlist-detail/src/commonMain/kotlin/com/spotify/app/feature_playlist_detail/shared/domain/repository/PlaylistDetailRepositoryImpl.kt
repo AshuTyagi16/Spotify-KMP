@@ -5,7 +5,7 @@ import com.spotify.app.core_base.shared.util.CacheExpirationUtil
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
 import com.spotify.app.core_network.shared.impl.exception.RestClientException
 import com.spotify.app.core_network.shared.impl.util.mapFromDTO
-import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailLocalDataSource
+import com.spotify.app.feature_playlist_detail.shared.data.local.PlaylistDetailLocalDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailRemoteDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.repository.PlaylistDetailRepository
 import com.spotify.app.feature_playlist_detail.shared.domain.mapper.PlaylistDetailDtoMapper

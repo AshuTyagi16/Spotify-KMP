@@ -1,7 +1,7 @@
 package com.spotify.app.feature_playlist_detail.shared.di
 
 import com.spotify.app.feature_playlist_detail.shared.PlaylistDetailDatabase
-import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailLocalDataSource
+import com.spotify.app.feature_playlist_detail.shared.data.local.PlaylistDetailLocalDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailRemoteDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.repository.PlaylistDetailRepository
 import com.spotify.app.feature_playlist_detail.shared.domain.paging_source.PlaylistDetailPagingSource
