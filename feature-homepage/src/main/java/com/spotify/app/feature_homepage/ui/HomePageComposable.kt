@@ -37,13 +37,11 @@ fun HomePageComposable(
     viewModel: HomePageViewModel,
     onPlaylistClick: (playlistId: String) -> Unit
 ) {
-    LaunchedEffect(viewModel) {
-        launch {
-            viewModel.fetchFeaturedPlaylists()
-        }
-        launch {
-            viewModel.fetchFeaturedAlbums()
-        }
+    LaunchedEffect(Unit) {
+        viewModel.fetchFeaturedPlaylists()
+    }
+    LaunchedEffect(Unit) {
+        viewModel.fetchFeaturedAlbums()
     }
     val playlistState = viewModel.featuredPlaylistData.collectAsState()
     val albumState = viewModel.featuredAlbumsData.collectAsState()
@@ -57,6 +55,12 @@ fun HomePageComposable(
             .background(Color.Black)
     ) {
         LazyColumn {
+            item {
+                Text(
+                    text = "PLAYLISTS ${playlistState.value.status.name} :: ${playlistState.value.errorMessage.orEmpty()}",
+                    color = Color.White
+                )
+            }
             item {
                 Spacer(
                     modifier = Modifier
@@ -130,6 +134,12 @@ fun HomePageComposable(
                         }
                     }
                 }
+            }
+            item {
+                Text(
+                    text = "ALBUMS ${albumState.value.status.name} :: ${albumState.value.errorMessage.orEmpty()}",
+                    color = Color.White
+                )
             }
             item {
                 Spacer(

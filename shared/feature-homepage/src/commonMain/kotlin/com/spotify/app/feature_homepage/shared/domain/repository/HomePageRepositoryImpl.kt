@@ -5,7 +5,6 @@ import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.core_base.shared.util.CacheExpirationUtil
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
 import com.spotify.app.core_network.shared.impl.util.mapFromDTO
-import com.spotify.app.core_network.shared.impl.util.mapStoreResponseToRestClientResult
 import com.spotify.app.feature_homepage.shared.data.local.HomePageLocalDataSource
 import com.spotify.app.feature_homepage.shared.data.network.HomePageRemoteDataSource
 import com.spotify.app.feature_homepage.shared.data.repository.HomePageRepository
@@ -26,6 +25,7 @@ import org.mobilenativefoundation.store.store5.MemoryPolicy
 import org.mobilenativefoundation.store.store5.SourceOfTruth
 import org.mobilenativefoundation.store.store5.StoreBuilder
 import org.mobilenativefoundation.store.store5.StoreReadRequest
+import org.mobilenativefoundation.store.store5.StoreReadResponse
 
 internal class HomePageRepositoryImpl(
     private val homePageRemoteDataSource: HomePageRemoteDataSource,
@@ -38,53 +38,81 @@ internal class HomePageRepositoryImpl(
         private const val FEATURED_ALBUMS_CACHE_KEY = "feature-albums"
     }
 
+    //TODO: Removed once https://github.com/MobileNativeFoundation/Store/pull/583 is merged & new version is released
+    private var playlistsResult: RestClientResult<FeaturedPlaylists>? = null
+    private var albumsResult: RestClientResult<FeaturedAlbums>? = null
+
     private val featurePlaylistStore =
-        StoreBuilder.from<String, RestClientResult<FeaturedPlaylists>, List<PlaylistItem>>(
+        StoreBuilder.from<String, RestClientResult<FeaturedPlaylists>, RestClientResult<List<PlaylistItem>>>(
             fetcher = Fetcher.of {
-                homePageRemoteDataSource.fetchFeaturedPlaylist()
+                playlistsResult = homePageRemoteDataSource.fetchFeaturedPlaylist()
                     .mapFromDTO { FeaturePlaylistsDtoMapper.asDomain(it!!) }
+                playlistsResult!!
             },
             sourceOfTruth = SourceOfTruth.of(
                 reader = {
                     homePageLocalDataSource.fetchFeaturedPlaylists()
-                        .map { it.map { PlaylistItemEntityMapper.asDomain(it) } }
+                        .map {
+                            if (it.isEmpty()) {
+                                RestClientResult.error(
+                                    errorMessage = playlistsResult?.errorMessage.orEmpty(),
+                                    errorCode = playlistsResult?.errorCode
+                                )
+                            } else {
+                                RestClientResult.success(it.map {
+                                    PlaylistItemEntityMapper.asDomain(
+                                        it
+                                    )
+                                })
+                            }
+                        }
                 },
                 writer = { _, input ->
                     if (input.status == RestClientResult.Status.SUCCESS) {
                         cacheExpirationUtil.setPlaylistWrittenTimestamp()
-                        homePageLocalDataSource.insertFeaturedPlaylists(input.data?.playlists?.items.orEmpty())
                     }
+                    homePageLocalDataSource.insertFeaturedPlaylists(input.data?.playlists?.items.orEmpty())
                 }
             )
         )
             .cachePolicy(
-                MemoryPolicy.builder<String, List<PlaylistItem>>()
+                MemoryPolicy.builder<String, RestClientResult<List<PlaylistItem>>>()
                     .setExpireAfterWrite(BaseConstants.CACHE_EXPIRE_TIME)
                     .build()
             )
             .build()
 
     private val featuredAlbumStore =
-        StoreBuilder.from<String, RestClientResult<FeaturedAlbums>, List<AlbumItem>>(
+        StoreBuilder.from<String, RestClientResult<FeaturedAlbums>, RestClientResult<List<AlbumItem>>>(
             fetcher = Fetcher.of {
-                homePageRemoteDataSource.fetchFeaturedAlbums()
+                albumsResult = homePageRemoteDataSource.fetchFeaturedAlbums()
                     .mapFromDTO { FeaturedAlbumDtoMapper.asDomain(it!!) }
+                albumsResult!!
             },
             sourceOfTruth = SourceOfTruth.of(
                 reader = {
                     homePageLocalDataSource.fetchFeaturedAlbums()
-                        .map { it.map { AlbumItemEntityMapper.asDomain(it) } }
+                        .map {
+                            if(it.isEmpty()) {
+                                RestClientResult.error(
+                                    errorMessage = albumsResult?.errorMessage.orEmpty(),
+                                    errorCode = albumsResult?.errorCode
+                                )
+                            } else {
+                                RestClientResult.success(it.map { AlbumItemEntityMapper.asDomain(it) })
+                            }
+                        }
                 },
                 writer = { _, input ->
                     if (input.status == RestClientResult.Status.SUCCESS) {
                         cacheExpirationUtil.setAlbumWrittenTimestamp()
-                        homePageLocalDataSource.insertFeaturedAlbums(input.data?.albums?.items.orEmpty())
                     }
+                    homePageLocalDataSource.insertFeaturedAlbums(input.data?.albums?.items.orEmpty())
                 }
             )
         )
             .cachePolicy(
-                MemoryPolicy.builder<String, List<AlbumItem>>()
+                MemoryPolicy.builder<String, RestClientResult<List<AlbumItem>>>()
                     .setExpireAfterWrite(BaseConstants.CACHE_EXPIRE_TIME)
                     .build()
             )
@@ -99,7 +127,29 @@ internal class HomePageRepositoryImpl(
             )
         )
             .flowOn(Dispatchers.IO)
-            .mapStoreResponseToRestClientResult()
+            .map {
+                when (it) {
+                    is StoreReadResponse.Data -> {
+                        it.value
+                    }
+
+                    is StoreReadResponse.Error.Exception -> {
+                        RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+                    }
+
+                    is StoreReadResponse.Error.Message -> {
+                        RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+                    }
+
+                    is StoreReadResponse.Loading -> {
+                        RestClientResult.loading()
+                    }
+
+                    is StoreReadResponse.NoNewData -> {
+                        RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+                    }
+                }
+            }
     }
 
     override suspend fun fetchFeaturedAlbums(): Flow<RestClientResult<List<AlbumItem>>> {
@@ -111,7 +161,29 @@ internal class HomePageRepositoryImpl(
             )
         )
             .flowOn(Dispatchers.IO)
-            .mapStoreResponseToRestClientResult()
+            .map {
+                when (it) {
+                    is StoreReadResponse.Data -> {
+                        it.value
+                    }
+
+                    is StoreReadResponse.Error.Exception -> {
+                        RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+                    }
+
+                    is StoreReadResponse.Error.Message -> {
+                        RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+                    }
+
+                    is StoreReadResponse.Loading -> {
+                        RestClientResult.loading()
+                    }
+
+                    is StoreReadResponse.NoNewData -> {
+                        RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
+                    }
+                }
+            }
     }
 
 }
