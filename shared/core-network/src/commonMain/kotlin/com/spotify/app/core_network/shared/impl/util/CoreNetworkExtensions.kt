@@ -3,8 +3,6 @@ package com.spotify.app.core_network.shared.impl.util
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
-import org.mobilenativefoundation.store.store5.StoreReadResponse
 
 suspend inline fun <DTO, Domain> RestClientResult<DTO>.mapFromDTO(
     crossinline dataMapper: suspend (t: DTO?) -> Domain
@@ -27,31 +25,6 @@ suspend inline fun <DTO, Domain> RestClientResult<DTO>.mapFromDTO(
         }
     }
 }
-
-fun <T> Flow<StoreReadResponse<T>>.mapStoreResponseToRestClientResult(): Flow<RestClientResult<T>> =
-    this.map {
-        when (it) {
-            is StoreReadResponse.Data -> {
-                RestClientResult.success(it.value)
-            }
-
-            is StoreReadResponse.Error.Exception -> {
-                RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
-            }
-
-            is StoreReadResponse.Error.Message -> {
-                RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
-            }
-
-            is StoreReadResponse.Loading -> {
-                RestClientResult.loading()
-            }
-
-            is StoreReadResponse.NoNewData -> {
-                RestClientResult.error(errorMessage = it.errorMessageOrNull().orEmpty())
-            }
-        }
-    }
 
 suspend fun <T> Flow<RestClientResult<T>>.collect(
     onLoading: suspend () -> Unit,

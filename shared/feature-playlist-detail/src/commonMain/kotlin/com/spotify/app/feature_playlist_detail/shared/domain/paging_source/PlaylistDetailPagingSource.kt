@@ -12,6 +12,11 @@ internal class PlaylistDetailPagingSource(
     private val playlistDetailRepository: PlaylistDetailRepository
 ) :
     PagingSource<FetchPlaylistDetailRequest, PlaylistDetailItem>() {
+
+    companion object {
+        private const val STARTING_OFFSET = 0L
+    }
+
     override fun getRefreshKey(state: PagingState<FetchPlaylistDetailRequest, PlaylistDetailItem>): FetchPlaylistDetailRequest? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey
@@ -23,7 +28,7 @@ internal class PlaylistDetailPagingSource(
         val key = params.key ?: FetchPlaylistDetailRequest(
             playlistId = playlistId,
             limit = params.loadSize.toLong(),
-            offset = 0
+            offset = STARTING_OFFSET
         )
         val result = playlistDetailRepository.fetchPlaylistDetail(key)
         return if (result.status == RestClientResult.Status.SUCCESS) {
@@ -39,7 +44,8 @@ internal class PlaylistDetailPagingSource(
                         offset = key.offset - key.limit
                     )
                 },
-                nextKey = if ((result.data?.firstOrNull()?.totalItemCount ?: 0) > key.offset + key.limit) {
+                nextKey = if ((result.data?.firstOrNull()?.totalItemCount ?: 0) > key.offset + key.limit
+                ) {
                     FetchPlaylistDetailRequest(
                         playlistId = key.playlistId,
                         limit = key.limit,
