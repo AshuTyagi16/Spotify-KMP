@@ -4,6 +4,7 @@ import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.core_base.shared.util.CacheExpirationUtil
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
+import com.spotify.app.core_network.shared.impl.exception.RestClientException
 import com.spotify.app.core_network.shared.impl.util.mapFromDTO
 import com.spotify.app.feature_homepage.shared.data.local.HomePageLocalDataSource
 import com.spotify.app.feature_homepage.shared.data.network.HomePageRemoteDataSource
@@ -38,40 +39,35 @@ internal class HomePageRepositoryImpl(
         private const val FEATURED_ALBUMS_CACHE_KEY = "feature-albums"
     }
 
-    //TODO: Removed once https://github.com/MobileNativeFoundation/Store/pull/583 is merged & new version is released
-    private var playlistsResult: RestClientResult<FeaturedPlaylists>? = null
-    private var albumsResult: RestClientResult<FeaturedAlbums>? = null
-
     private val featurePlaylistStore =
         StoreBuilder.from<String, RestClientResult<FeaturedPlaylists>, RestClientResult<List<PlaylistItem>>>(
             fetcher = Fetcher.of {
-                playlistsResult = homePageRemoteDataSource.fetchFeaturedPlaylist()
+                val result = homePageRemoteDataSource.fetchFeaturedPlaylist()
                     .mapFromDTO { FeaturePlaylistsDtoMapper.asDomain(it!!) }
-                playlistsResult!!
+                if (result.status == RestClientResult.Status.SUCCESS) {
+                    result
+                } else {
+                    throw RestClientException(
+                        errorMessage = result.errorMessage.orEmpty()
+                    )
+                }
             },
             sourceOfTruth = SourceOfTruth.of(
                 reader = {
                     homePageLocalDataSource.fetchFeaturedPlaylists()
                         .map {
-                            if (it.isEmpty()) {
-                                RestClientResult.error(
-                                    errorMessage = playlistsResult?.errorMessage.orEmpty(),
-                                    errorCode = playlistsResult?.errorCode
+                            RestClientResult.success(it.map {
+                                PlaylistItemEntityMapper.asDomain(
+                                    it
                                 )
-                            } else {
-                                RestClientResult.success(it.map {
-                                    PlaylistItemEntityMapper.asDomain(
-                                        it
-                                    )
-                                })
-                            }
+                            })
                         }
                 },
                 writer = { _, input ->
                     if (input.status == RestClientResult.Status.SUCCESS) {
                         cacheExpirationUtil.setPlaylistWrittenTimestamp()
+                        homePageLocalDataSource.insertFeaturedPlaylists(input.data?.playlists?.items.orEmpty())
                     }
-                    homePageLocalDataSource.insertFeaturedPlaylists(input.data?.playlists?.items.orEmpty())
                 }
             )
         )
@@ -85,29 +81,28 @@ internal class HomePageRepositoryImpl(
     private val featuredAlbumStore =
         StoreBuilder.from<String, RestClientResult<FeaturedAlbums>, RestClientResult<List<AlbumItem>>>(
             fetcher = Fetcher.of {
-                albumsResult = homePageRemoteDataSource.fetchFeaturedAlbums()
+                val result = homePageRemoteDataSource.fetchFeaturedAlbums()
                     .mapFromDTO { FeaturedAlbumDtoMapper.asDomain(it!!) }
-                albumsResult!!
+                if (result.status == RestClientResult.Status.SUCCESS) {
+                    result
+                } else {
+                    throw RestClientException(
+                        errorMessage = result.errorMessage.orEmpty()
+                    )
+                }
             },
             sourceOfTruth = SourceOfTruth.of(
                 reader = {
                     homePageLocalDataSource.fetchFeaturedAlbums()
                         .map {
-                            if(it.isEmpty()) {
-                                RestClientResult.error(
-                                    errorMessage = albumsResult?.errorMessage.orEmpty(),
-                                    errorCode = albumsResult?.errorCode
-                                )
-                            } else {
-                                RestClientResult.success(it.map { AlbumItemEntityMapper.asDomain(it) })
-                            }
+                            RestClientResult.success(it.map { AlbumItemEntityMapper.asDomain(it) })
                         }
                 },
                 writer = { _, input ->
                     if (input.status == RestClientResult.Status.SUCCESS) {
                         cacheExpirationUtil.setAlbumWrittenTimestamp()
+                        homePageLocalDataSource.insertFeaturedAlbums(input.data?.albums?.items.orEmpty())
                     }
-                    homePageLocalDataSource.insertFeaturedAlbums(input.data?.albums?.items.orEmpty())
                 }
             )
         )

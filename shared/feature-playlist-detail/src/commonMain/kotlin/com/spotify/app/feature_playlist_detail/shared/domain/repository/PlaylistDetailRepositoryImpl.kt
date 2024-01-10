@@ -3,6 +3,7 @@ package com.spotify.app.feature_playlist_detail.shared.domain.repository
 import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.core_base.shared.util.CacheExpirationUtil
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
+import com.spotify.app.core_network.shared.impl.exception.RestClientException
 import com.spotify.app.core_network.shared.impl.util.mapFromDTO
 import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailLocalDataSource
 import com.spotify.app.feature_playlist_detail.shared.data.network.PlaylistDetailRemoteDataSource
@@ -25,14 +26,11 @@ internal class PlaylistDetailRepositoryImpl(
     private val cacheExpirationUtil: CacheExpirationUtil
 ) : PlaylistDetailRepository {
 
-    //TODO: Removed once https://github.com/MobileNativeFoundation/Store/pull/583 is merged & new version is released
-    private var result: RestClientResult<PlaylistDetail>? = null
-
     private val store =
         StoreBuilder.from<FetchPlaylistDetailRequest, RestClientResult<PlaylistDetail>, RestClientResult<PlaylistDetail>>(
             fetcher = Fetcher.of {
                 val playlistDetailDtoMapper = PlaylistDetailDtoMapper(it)
-                result = playlistDetailRemoteDataSource.fetchPlaylistDetail(
+                val result = playlistDetailRemoteDataSource.fetchPlaylistDetail(
                     playlistId = it.playlistId,
                     limit = it.limit,
                     offset = it.offset
@@ -40,7 +38,11 @@ internal class PlaylistDetailRepositoryImpl(
                     .mapFromDTO {
                         playlistDetailDtoMapper.asDomain(it!!)
                     }
-                result!!
+                if (result.status == RestClientResult.Status.SUCCESS) {
+                    result
+                } else {
+                    throw RestClientException(errorMessage = result.errorMessage.orEmpty())
+                }
             },
             sourceOfTruth = SourceOfTruth.of(
                 reader = { key ->
@@ -49,18 +51,14 @@ internal class PlaylistDetailRepositoryImpl(
                         limit = key.limit,
                         offset = key.offset
                     ).map {
-                       if(it.isEmpty()){
-                           RestClientResult.error(errorMessage = result?.errorMessage.orEmpty(), errorCode = result?.errorCode)
-                       } else {
-                           RestClientResult.success(
-                               PlaylistDetail(
-                                   items = it.map { PlaylistDetailItemEntityMapper.asDomain(it) },
-                                   limit = it.first().limitValue,
-                                   offset = it.first().offsetValue,
-                                   total = it.first().total
-                               )
-                           )
-                       }
+                        RestClientResult.success(
+                            PlaylistDetail(
+                                items = it.map { PlaylistDetailItemEntityMapper.asDomain(it) },
+                                limit = it.first().limitValue,
+                                offset = it.first().offsetValue,
+                                total = it.first().total
+                            )
+                        )
                     }
                 },
                 writer = { key, input ->
@@ -70,12 +68,12 @@ internal class PlaylistDetailRepositoryImpl(
                             limit = key.limit,
                             offset = key.offset
                         )
+                        playlistDetailLocalDataSource.insertPlaylistDetail(
+                            playlistDetailItems = input.data?.items.orEmpty(),
+                            totalItemCount = input.data?.total ?: 0L,
+                            fetchPlaylistDetailRequest = key
+                        )
                     }
-                    playlistDetailLocalDataSource.insertPlaylistDetail(
-                        playlistDetailItems = input.data?.items.orEmpty(),
-                        totalItemCount = input.data?.total ?: 0L,
-                        fetchPlaylistDetailRequest = key
-                    )
                 }
             )
         )
@@ -94,10 +92,14 @@ internal class PlaylistDetailRepositoryImpl(
             limit = fetchPlaylistDetailRequest.limit,
             offset = fetchPlaylistDetailRequest.offset
         )
-        return if (isCacheExpired) {
-            store.fresh(fetchPlaylistDetailRequest)
-        } else {
-            store.get(fetchPlaylistDetailRequest)
+        return try {
+            if (isCacheExpired) {
+                store.fresh(fetchPlaylistDetailRequest)
+            } else {
+                store.get(fetchPlaylistDetailRequest)
+            }
+        } catch (e: RestClientException) {
+            RestClientResult.error(errorMessage = e.errorMessage)
         }
     }
 }
