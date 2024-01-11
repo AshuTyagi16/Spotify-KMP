@@ -49,6 +49,9 @@ dependencies {
     // Shared Feature HomePage Module
     implementation(project(":shared:feature-homepage"))
 
+    // Compose Shimmer
+    implementation(libs.compose.shimmer)
+
     // Coil (Image Loading)
     implementation(libs.coil)
 

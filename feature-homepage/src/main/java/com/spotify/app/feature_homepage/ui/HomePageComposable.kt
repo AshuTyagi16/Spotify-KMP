@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -56,167 +57,159 @@ fun HomePageComposable(
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        LazyColumn {
-            item {
-                Text(
-                    text = "PLAYLISTS ${playlistState.value.status.name} :: ${playlistState.value.errorMessage.orEmpty()}",
-                    color = Color.White
-                )
-            }
-            item {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(20.dp)
-                )
-            }
-            item {
-                if (playlists.isNotEmpty()) {
-                    Text(
-                        text = "Featured Playlists",
-                        fontSize = 24.sp,
-                        color = Color.White,
-                        fontStyle = FontStyle.Normal,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontFamily = FontFamily.SansSerif,
+        if (playlists.isNotEmpty() && albums.isNotEmpty()) {
+            LazyColumn {
+                item {
+                    Spacer(
                         modifier = Modifier
-                            .wrapContentSize()
-                            .padding(horizontal = 6.dp)
+                            .fillMaxWidth()
+                            .height(20.dp)
                     )
                 }
-            }
-            item {
-                LazyRow(
-                    modifier = Modifier
-                        .padding(vertical = 10.dp)
-                ) {
-                    items(
-                        items = playlists,
-                        key = { it.id }
+                item {
+                    if (playlists.isNotEmpty()) {
+                        Text(
+                            text = "Featured Playlists",
+                            fontSize = 24.sp,
+                            color = Color.White,
+                            fontStyle = FontStyle.Normal,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontFamily = FontFamily.SansSerif,
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .padding(horizontal = 6.dp)
+                        )
+                    }
+                }
+                item {
+                    LazyRow(
+                        modifier = Modifier
+                            .padding(vertical = 10.dp)
                     ) {
-                        Column {
-                            AsyncImage(
-                                model = it.image,
-                                contentDescription = "Playlist ${it.name}",
-                                modifier = Modifier
-                                    .padding(horizontal = 6.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .width(200.dp)
-                                    .height(200.dp)
-                                    .clickable {
-                                        onPlaylistClick.invoke(it.id)
-                                    }
-                            )
+                        items(
+                            items = playlists,
+                            key = { it.id }
+                        ) {
+                            Column {
+                                AsyncImage(
+                                    model = it.image,
+                                    contentDescription = "Playlist ${it.name}",
+                                    modifier = Modifier
+                                        .padding(horizontal = 6.dp)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .width(200.dp)
+                                        .height(200.dp)
+                                        .clickable {
+                                            onPlaylistClick.invoke(it.id)
+                                        }
+                                )
 
-                            Text(
-                                text = it.name,
-                                color = Color.White,
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(start = 6.dp, top = 4.dp)
-                                    .width(180.dp)
-                            )
+                                Text(
+                                    text = it.name,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Normal,
+                                    fontSize = 12.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(start = 6.dp, top = 4.dp)
+                                        .width(180.dp)
+                                )
 
-                            Text(
-                                text = it.description,
-                                color = Color.White.copy(alpha = 0.8f),
-                                fontWeight = FontWeight.Light,
-                                fontSize = 10.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(start = 6.dp, top = 2.dp)
-                                    .width(180.dp)
-                            )
+                                Text(
+                                    text = it.description,
+                                    color = Color.White.copy(alpha = 0.8f),
+                                    fontWeight = FontWeight.Light,
+                                    fontSize = 10.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(start = 6.dp, top = 2.dp)
+                                        .width(180.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+                item {
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(20.dp)
+                    )
+                }
+                item {
+                    if (albums.isNotEmpty()) {
+                        Text(
+                            text = "Featured Albums",
+                            fontSize = 24.sp,
+                            color = Color.White,
+                            fontStyle = FontStyle.Normal,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontFamily = FontFamily.SansSerif,
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .padding(horizontal = 6.dp)
+                        )
+                    }
+                }
+                item {
+                    LazyRow(
+                        modifier = Modifier
+                            .padding(vertical = 10.dp)
+                    ) {
+                        items(
+                            items = albums,
+                            key = { it.id }
+                        ) {
+                            Column {
+                                AsyncImage(
+                                    model = it.image,
+                                    contentDescription = "Album ${it.name}",
+                                    modifier = Modifier
+                                        .padding(horizontal = 6.dp)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .width(200.dp)
+                                        .height(200.dp)
+                                        .clickable {
+                                            onAlbumClick.invoke(it)
+                                        }
+                                )
+
+                                Text(
+                                    text = it.name,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Normal,
+                                    fontSize = 12.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(start = 6.dp, top = 4.dp)
+                                        .width(180.dp)
+                                )
+
+                                Text(
+                                    text = it.artists,
+                                    color = Color.White.copy(alpha = 0.8f),
+                                    fontWeight = FontWeight.Light,
+                                    fontSize = 10.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(start = 6.dp, top = 2.dp)
+                                        .width(180.dp)
+                                )
+                            }
                         }
                     }
                 }
             }
-            item {
-                Text(
-                    text = "ALBUMS ${albumState.value.status.name} :: ${albumState.value.errorMessage.orEmpty()}",
-                    color = Color.White
-                )
-            }
-            item {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(20.dp)
-                )
-            }
-            item {
-                if (albums.isNotEmpty()) {
-                    Text(
-                        text = "Featured Albums",
-                        fontSize = 24.sp,
-                        color = Color.White,
-                        fontStyle = FontStyle.Normal,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontFamily = FontFamily.SansSerif,
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .padding(horizontal = 6.dp)
-                    )
-                }
-            }
-            item {
-                LazyRow(
-                    modifier = Modifier
-                        .padding(vertical = 10.dp)
-                ) {
-                    items(
-                        items = albums,
-                        key = { it.id }
-                    ) {
-                        Column {
-                            AsyncImage(
-                                model = it.image,
-                                contentDescription = "Album ${it.name}",
-                                modifier = Modifier
-                                    .padding(horizontal = 6.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .width(200.dp)
-                                    .height(200.dp)
-                                    .clickable {
-                                        onAlbumClick.invoke(it)
-                                    }
-                            )
-
-                            Text(
-                                text = it.name,
-                                color = Color.White,
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 12.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(start = 6.dp, top = 4.dp)
-                                    .width(180.dp)
-                            )
-
-                            Text(
-                                text = it.artists,
-                                color = Color.White.copy(alpha = 0.8f),
-                                fontWeight = FontWeight.Light,
-                                fontSize = 10.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(start = 6.dp, top = 2.dp)
-                                    .width(180.dp)
-                            )
-                        }
-                    }
-                }
-            }
+        } else {
+            HomeScreenPlaceholder()
         }
     }
 }

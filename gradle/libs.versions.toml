@@ -39,6 +39,7 @@ coil = "2.5.0"
 navigation-component = "2.7.6"
 ktlint-gradle = "12.1.0"
 paging = "3.3.0-alpha02"
+compose-shimmer = "1.2.0"
 
 [libraries]
 ## Core-Ktx
@@ -55,6 +56,9 @@ multiplatform-settings-couroutine = { module = "com.russhwolf:multiplatform-sett
 ## Paging
 paging = { module = "androidx.paging:paging-common", version.ref = "paging" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
+
+## Compose Shimmer
+compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "compose-shimmer" }
 
 ## Compose
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
