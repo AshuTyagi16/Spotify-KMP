@@ -3,6 +3,7 @@ package com.spotify.app.feature_playlist_detail.shared.domain.use_case.impl
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.feature_playlist_detail.shared.domain.model.FetchPlaylistDetailRequest
 import com.spotify.app.feature_playlist_detail.shared.domain.model.PlaylistDetailItem
 import com.spotify.app.feature_playlist_detail.shared.domain.paging_source.PlaylistDetailPagingSource
@@ -23,9 +24,9 @@ internal class FetchPlaylistDetailUseCaseImpl : FetchPlaylistDetailUseCase, Koin
 
         return Pager(
             config = PagingConfig(
-                pageSize = 10,
+                pageSize = BaseConstants.DEFAULT_PAGE_SIZE.toInt(),
                 enablePlaceholders = false,
-                initialLoadSize = 10
+                initialLoadSize = BaseConstants.DEFAULT_PAGE_SIZE.toInt()
             )
         ) {
             playlistDetailPagingSource

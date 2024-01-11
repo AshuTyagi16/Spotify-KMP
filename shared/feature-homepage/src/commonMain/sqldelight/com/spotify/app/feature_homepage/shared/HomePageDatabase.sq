@@ -7,7 +7,7 @@ CREATE TABLE PlaylistItemEntitity(
 );
 
 insertFeaturedPlaylist:
-INSERT INTO PlaylistItemEntitity(id, description, name, image, trackCount)
+INSERT OR REPLACE INTO PlaylistItemEntitity(id, description, name, image, trackCount)
 VALUES (?, ?, ?, ?, ?);
 
 fetchFeaturedPlaylists:
@@ -26,7 +26,7 @@ CREATE TABLE AlbumItemEntity(
 );
 
 insertFeaturedAlbum:
-INSERT INTO AlbumItemEntity(id,name,image,trackCount, releaseDate, artists)
+INSERT OR REPLACE INTO AlbumItemEntity(id,name,image,trackCount, releaseDate, artists)
 VALUES(?,?,?,?,?,?);
 
 fetchFeaturedAlbums:

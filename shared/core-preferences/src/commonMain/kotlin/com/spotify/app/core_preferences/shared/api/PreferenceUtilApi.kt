@@ -27,4 +27,17 @@ interface PreferenceUtilApi {
         offset: Long,
         timestamp: Long
     )
+
+    suspend fun fetchAlbumDetailLastWrittenTimestamp(
+        albumId: String,
+        limit: Long,
+        offset: Long
+    ): Long?
+
+    suspend fun setAlbumDetailLastWrittenTimestamp(
+        albumId: String,
+        limit: Long,
+        offset: Long,
+        timestamp: Long
+    )
 }

@@ -49,8 +49,8 @@ internal class HomePageLocalDataSource(database: HomePageDatabase) {
                         id = it.id,
                         name = it.name,
                         image = it.image,
-                        trackCount = it.trackCount,
-                        releaseDate = it.releaseDate,
+                        trackCount = it.trackCount ?: 0,
+                        releaseDate = it.releaseDate.orEmpty(),
                         artists = it.artists
                     )
                 }

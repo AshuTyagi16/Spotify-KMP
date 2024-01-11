@@ -3,7 +3,6 @@ CREATE TABLE AlbumDetailItemEntity(
     albumId TEXT NOT NULL,
     trackName TEXT NOT NULL,
     artists TEXT NOT NULL,
-    image TEXT NOT NULL,
     limitValue INTEGER NOT NULL,
     offsetValue INTEGER NOT NULL,
     total INTEGER NOT NULL,
@@ -11,8 +10,8 @@ CREATE TABLE AlbumDetailItemEntity(
 );
 
 insertAlbumDetailItem:
-INSERT OR REPLACE INTO AlbumDetailItemEntity(id,albumId,trackName, artists, image,limitValue,offsetValue, total)
-VALUES (?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO AlbumDetailItemEntity(id,albumId,trackName, artists,limitValue,offsetValue, total)
+VALUES (?,?,?,?,?,?,?);
 
 fetchAlbumDetailItem:
 SELECT * FROM AlbumDetailItemEntity WHERE albumId = ? AND limitValue = ? AND offsetValue = ?;

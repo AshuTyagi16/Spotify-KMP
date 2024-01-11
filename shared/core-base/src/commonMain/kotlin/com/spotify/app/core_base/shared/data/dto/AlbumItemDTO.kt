@@ -13,14 +13,14 @@ data class AlbumItemDTO(
     val id: String,
 
     @SerialName("images")
-    val images: List<ImageDTO>,
+    val images: List<ImageDTO>? = null,
 
     @SerialName("name")
     val name: String,
 
     @SerialName("release_date")
-    val releaseDate: String,
+    val releaseDate: String? = null,
 
     @SerialName("total_tracks")
-    val totalTracks: Long
+    val totalTracks: Long? = null
 )

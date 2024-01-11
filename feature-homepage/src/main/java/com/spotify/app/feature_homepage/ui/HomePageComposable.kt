@@ -29,13 +29,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomePageComposable(
     viewModel: HomePageViewModel,
-    onPlaylistClick: (playlistId: String) -> Unit
+    onPlaylistClick: (playlistId: String) -> Unit,
+    onAlbumClick: (albumItem: AlbumItem) -> Unit
 ) {
     LaunchedEffect(Unit) {
         viewModel.fetchFeaturedPlaylists()
@@ -181,6 +183,9 @@ fun HomePageComposable(
                                     .clip(RoundedCornerShape(8.dp))
                                     .width(200.dp)
                                     .height(200.dp)
+                                    .clickable {
+                                        onAlbumClick.invoke(it)
+                                    }
                             )
 
                             Text(

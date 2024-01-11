@@ -46,6 +46,9 @@ kotlin {
 
             // Shared Feature Playlist Detail Module
             api(project(":shared:feature-playlist-detail"))
+
+            // Shared Feature Album Detail Module
+            api(project(":shared:feature-album-detail"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -74,6 +77,9 @@ kotlin {
 
             // Shared Feature Playlist Detail Module
             export(project(":shared:feature-playlist-detail"))
+
+            // Shared Feature Album Detail Module
+            export(project(":shared:feature-album-detail"))
 
             isStatic = true
 

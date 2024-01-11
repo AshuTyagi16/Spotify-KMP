@@ -12,7 +12,7 @@ fun AlbumItemDTO.toAlbumItem(): AlbumItem {
     return AlbumItem(
         id = this.id,
         name = this.name,
-        image = this.images.firstOrNull()?.url.orEmpty(),
+        image = this.images?.firstOrNull()?.url.orEmpty(),
         releaseDate = this.releaseDate,
         trackCount = this.totalTracks,
         artists = this.artists.joinToString(separator = ",") { it.name }

@@ -6,7 +6,7 @@ sealed class Screen(val route: String) {
 
     data object PlaylistDetail : Screen("playlist_detail")
 
-    data object AlbumTracks : Screen("album_tracks")
+    data object AlbumDetail : Screen("album_detail")
 
     fun withArgs(vararg args: Any): String {
         return buildString {

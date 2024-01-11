@@ -2,6 +2,7 @@ package com.spotify.app.feature_playlist_detail.shared.domain.paging_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.core_network.shared.impl.data.model.RestClientResult
 import com.spotify.app.feature_playlist_detail.shared.data.repository.PlaylistDetailRepository
 import com.spotify.app.feature_playlist_detail.shared.domain.model.FetchPlaylistDetailRequest
@@ -12,10 +13,6 @@ internal class PlaylistDetailPagingSource(
     private val playlistDetailRepository: PlaylistDetailRepository
 ) :
     PagingSource<FetchPlaylistDetailRequest, PlaylistDetailItem>() {
-
-    companion object {
-        private const val STARTING_OFFSET = 0L
-    }
 
     override fun getRefreshKey(state: PagingState<FetchPlaylistDetailRequest, PlaylistDetailItem>): FetchPlaylistDetailRequest? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -28,7 +25,7 @@ internal class PlaylistDetailPagingSource(
         val key = params.key ?: FetchPlaylistDetailRequest(
             playlistId = playlistId,
             limit = params.loadSize.toLong(),
-            offset = STARTING_OFFSET
+            offset = BaseConstants.DEFAULT_OFFSET
         )
         val result = playlistDetailRepository.fetchPlaylistDetail(key)
         return if (result.status == RestClientResult.Status.SUCCESS) {

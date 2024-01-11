@@ -63,6 +63,9 @@ dependencies {
     // Feature Playlist Detail Module
     implementation(project(":feature-playlist-detail"))
 
+    // Feature Album Detail Module
+    implementation(project(":feature-album-detail"))
+
     // Shared Module
     implementation(project(":shared"))
 

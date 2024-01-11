@@ -3,6 +3,7 @@ package com.spotify.app.feature_album_detail.shared.di
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import com.spotify.app.feature_album_detail.shared.AlbumDetailDatabase
+import com.spotify.app.feature_album_detail.shared.ui.AlbumDetailViewModel
 import com.spotify.app.feature_album_detail.shared.util.FeatureAlbumDetailConstants
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
@@ -15,5 +16,5 @@ actual fun getFeatureAlbumDetailPlatformModule(): Module = module {
             FeatureAlbumDetailConstants.ALBUM_DATABASE_NAME
         )
     }
-//    single { PlaylistDetailViewModel(get()) }
+    single { AlbumDetailViewModel(get()) }
 }

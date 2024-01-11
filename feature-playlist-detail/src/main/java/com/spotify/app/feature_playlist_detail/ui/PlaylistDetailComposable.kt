@@ -29,6 +29,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
+import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.feature_playlist_detail.shared.domain.model.FetchPlaylistDetailRequest
 import com.spotify.app.feature_playlist_detail.shared.ui.PlaylistDetailViewModel
 
@@ -41,8 +42,8 @@ fun PlaylistDetailComposable(
         viewModel.fetchPlaylistDetail(
             fetchPlaylistDetailRequest = FetchPlaylistDetailRequest(
                 playlistId = playlistId,
-                limit = 1,
-                offset = 0
+                limit = BaseConstants.DEFAULT_PAGE_SIZE,
+                offset = BaseConstants.DEFAULT_OFFSET
             )
         )
     }

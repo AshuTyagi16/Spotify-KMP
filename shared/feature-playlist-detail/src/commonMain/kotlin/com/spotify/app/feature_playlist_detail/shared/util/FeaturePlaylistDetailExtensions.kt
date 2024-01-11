@@ -14,7 +14,7 @@ fun PlaylistDetailDTO.toPlaylistDetailItemList(
             playlistId = fetchPlaylistDetailRequest.playlistId,
             trackName = it.track.name,
             artists = it.track.album.artists.joinToString(separator = ",") { it.name },
-            image = it.track.album.images.firstOrNull()?.url.orEmpty(),
+            image = it.track.album.images?.firstOrNull()?.url.orEmpty(),
             limit = fetchPlaylistDetailRequest.limit,
             offset = fetchPlaylistDetailRequest.offset,
             totalItemCount = this.total
