@@ -49,6 +49,9 @@ dependencies {
     // Shared Feature Playlist Detail Module
     implementation(project(":shared:feature-playlist-detail"))
 
+    // Compose Shimmer
+    implementation(libs.compose.shimmer)
+
     // Coil (Image Loading)
     implementation(libs.coil)
 

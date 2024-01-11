@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,14 +13,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,9 +37,11 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.feature_album_detail.shared.domain.model.FetchAlbumDetailRequest
 import com.spotify.app.feature_album_detail.shared.ui.AlbumDetailViewModel
+import kotlinx.coroutines.launch
 import java.net.URLDecoder
 
 @Composable
@@ -40,6 +50,9 @@ fun AlbumDetailComposable(
     albumUrl: String,
     viewModel: AlbumDetailViewModel
 ) {
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
     LaunchedEffect(viewModel) {
         viewModel.fetchAlbumDetail(
             fetchAlbumDetailRequest = FetchAlbumDetailRequest(
@@ -49,134 +62,174 @@ fun AlbumDetailComposable(
             )
         )
     }
-    val data = viewModel.data.collectAsLazyPagingItems()
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.92f))
-    ) {
-        LazyColumn(
+    val data = viewModel.pagingData.collectAsLazyPagingItems()
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+    ) { padding ->
+        Box(
             modifier = Modifier
-                .padding(12.dp)
+                .fillMaxSize()
+                .padding(padding)
+                .background(Color.Black.copy(alpha = 0.92f))
         ) {
-            items(
-                count = data.itemCount,
-                key = data.itemKey { it.id },
+            LazyColumn(
+                modifier = Modifier
+                    .padding(12.dp)
             ) {
-                Row(
-                    modifier = Modifier
-                        .padding(vertical = 5.dp)
+                items(
+                    count = data.itemCount,
+                    key = data.itemKey { it.id },
                 ) {
-                    AsyncImage(
-                        model = URLDecoder.decode(albumUrl, "utf-8"),
-                        contentDescription = data[it]?.trackName,
+                    Row(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(4.dp))
-                            .width(50.dp)
-                            .height(50.dp)
-                    )
-
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .padding(horizontal = 6.dp)
-                            .height(50.dp)
+                            .padding(vertical = 5.dp)
                     ) {
-                        Text(
-                            text = "${it + 1} - ${data[it]?.trackName}",
-                            color = Color.White,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 14.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
+                        AsyncImage(
+                            model = URLDecoder.decode(albumUrl, "utf-8"),
+                            placeholder = rememberAsyncImagePainter(
+                                model = BaseConstants.LOADING_ERROR_PLACEHOLDER
+                            ),
+                            error = rememberAsyncImagePainter(
+                                model = BaseConstants.LOADING_ERROR_PLACEHOLDER
+                            ),
+                            contentScale = ContentScale.Crop,
+                            contentDescription = data[it]?.trackName,
                             modifier = Modifier
+                                .clip(RoundedCornerShape(4.dp))
+                                .width(50.dp)
+                                .height(50.dp)
                         )
 
-                        Text(
-                            text = data[it]?.artists.orEmpty(),
-                            color = Color.White.copy(alpha = 0.8f),
-                            fontWeight = FontWeight.Light,
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier
-                                .padding(top = 2.dp)
-                        )
-                    }
-                }
-            }
-
-            when (val state = data.loadState.refresh) { //FIRST LOAD
-                is LoadState.Error -> {
-                    item {
-                        Text(
-                            modifier = Modifier
-                                .padding(8.dp),
-                            text = "ERROR ${state.error.message}",
-                            color = Color.White
-                        )
-                    }
-                }
-
-                is LoadState.Loading -> { // Loading UI
-                    item {
                         Column(
-                            modifier = Modifier
-                                .fillParentMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .padding(horizontal = 6.dp)
+                                .height(50.dp)
                         ) {
                             Text(
+                                text = "${it + 1} - ${data[it]?.trackName}",
+                                color = Color.White,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier
-                                    .padding(8.dp),
-                                text = "Refresh Loading",
-                                color = Color.White
                             )
 
-                            CircularProgressIndicator(color = Color.Black)
-                        }
-                    }
-                }
-
-                else -> {}
-            }
-
-            when (val state = data.loadState.append) { // Pagination
-                is LoadState.Error -> {
-                    item {
-                        Text(
-                            modifier = Modifier
-                                .padding(8.dp),
-                            text = "ERROR ${state.error.message}",
-                            color = Color.White
-                        )
-                    }
-                }
-
-                is LoadState.Loading -> { // Pagination Loading UI
-                    item {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                        ) {
                             Text(
-                                text = "Pagination Loading",
-                                color = Color.White
+                                text = data[it]?.artists.orEmpty(),
+                                color = Color.White.copy(alpha = 0.8f),
+                                fontWeight = FontWeight.Light,
+                                fontSize = 12.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                    .padding(top = 2.dp)
                             )
-
-                            CircularProgressIndicator(color = Color.Black)
                         }
                     }
                 }
 
-                else -> {}
+                when (val state = data.loadState.refresh) {
+                    is LoadState.Error -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = state.error.message.orEmpty()
+                            )
+                        }
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillParentMaxSize()
+                                    .height(50.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Button(
+                                    onClick = {
+                                        data.retry()
+                                    }
+                                ) {
+                                    Text(
+                                        text = "Retry",
+                                        color = Color.White
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    is LoadState.Loading -> {
+                        item {
+                            Column(
+                                modifier = Modifier
+                                    .fillParentMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                            ) {
+                                AlbumDetailPlaceholder()
+                            }
+                        }
+                    }
+
+                    else -> {}
+                }
+
+                when (val state = data.loadState.append) {
+                    is LoadState.Error -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = state.error.message.orEmpty()
+                            )
+                        }
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(50.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Button(
+                                    onClick = {
+                                        data.retry()
+                                    }
+                                ) {
+                                    Text(
+                                        text = "Retry",
+                                        color = Color.White
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    is LoadState.Loading -> { // Pagination Loading UI
+                        item {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                            ) {
+
+                                Text(
+                                    text = "Loading",
+                                    color = Color.White
+                                )
+
+                                Spacer(modifier = Modifier.height(4.dp))
+
+                                CircularProgressIndicator(color = Color.White)
+                            }
+                        }
+                    }
+
+                    else -> {}
+                }
             }
         }
     }
-
 }
 

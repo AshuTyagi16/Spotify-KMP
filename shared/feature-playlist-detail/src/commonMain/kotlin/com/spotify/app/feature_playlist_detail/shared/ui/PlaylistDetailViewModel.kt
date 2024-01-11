@@ -13,13 +13,17 @@ class PlaylistDetailViewModel(
     private val fetchPlaylistDetailUseCase: FetchPlaylistDetailUseCase
 ) : ViewModel() {
 
-    private val _data = MutableSharedFlow<PagingData<PlaylistDetailItem>>()
-    val data: Flow<PagingData<PlaylistDetailItem>>
-        get() = _data
+    private val _pagingData = MutableSharedFlow<PagingData<PlaylistDetailItem>>()
+    val pagingData: Flow<PagingData<PlaylistDetailItem>>
+        get() = _pagingData
 
     suspend fun fetchPlaylistDetail(fetchPlaylistDetailRequest: FetchPlaylistDetailRequest) {
         fetchPlaylistDetailUseCase.fetchPlaylistDetail(fetchPlaylistDetailRequest).collectLatest {
-            _data.emit(it)
+            _pagingData.emit(it)
         }
+    }
+
+    suspend fun retry() {
+
     }
 }

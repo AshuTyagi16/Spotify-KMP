@@ -50,6 +50,9 @@ dependencies {
     // Shared Feature Album Detail Module
     implementation(project(":shared:feature-album-detail"))
 
+    // Compose Shimmer
+    implementation(libs.compose.shimmer)
+
     // Coil (Image Loading)
     implementation(libs.coil)
 

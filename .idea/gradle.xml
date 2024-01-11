@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/feature-album-detail" />
             <option value="$PROJECT_DIR$/feature-homepage" />
             <option value="$PROJECT_DIR$/feature-playlist-detail" />
             <option value="$PROJECT_DIR$/shared" />

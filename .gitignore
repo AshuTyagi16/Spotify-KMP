@@ -9,6 +9,7 @@
 /.idea/deploymentTargetDropDown.xml
 /.idea/migrations.xml
 /.idea/assetWizardSettings.xml
+/.idea/gradle.xml
 /.idea/inspectionProfiles
 .DS_Store
 /build

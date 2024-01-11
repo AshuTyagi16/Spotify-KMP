@@ -8,4 +8,8 @@ object BaseConstants {
 
     const val DEFAULT_PAGE_SIZE = 10L
     const val DEFAULT_OFFSET = 0L
+    
+    const val SHIMMER_ALPHA = 0.2f
+
+    const val LOADING_ERROR_PLACEHOLDER = "https://imgur.com/UWROM7r.png"
 }

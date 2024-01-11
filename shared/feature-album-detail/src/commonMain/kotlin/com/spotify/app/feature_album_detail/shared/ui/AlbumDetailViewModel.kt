@@ -13,13 +13,13 @@ class AlbumDetailViewModel(
     private val fetchAlbumDetailUseCase: FetchAlbumDetailUseCase
 ) : ViewModel() {
 
-    private val _data = MutableSharedFlow<PagingData<AlbumDetailItem>>()
-    val data: Flow<PagingData<AlbumDetailItem>>
-        get() = _data
+    private val _pagingData = MutableSharedFlow<PagingData<AlbumDetailItem>>()
+    val pagingData: Flow<PagingData<AlbumDetailItem>>
+        get() = _pagingData
 
     suspend fun fetchAlbumDetail(fetchAlbumDetailRequest: FetchAlbumDetailRequest) {
         fetchAlbumDetailUseCase.fetchAlbumDetail(fetchAlbumDetailRequest).collectLatest {
-            _data.emit(it)
+            _pagingData.emit(it)
         }
     }
 }
