@@ -24,3 +24,4 @@ shared/core-network/build
 shared/core-preferences/build
 shared/feature-homepage/build
 shared/feature-playlist-detail/build
+shared/feature-album-detail/build

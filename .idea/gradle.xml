@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/shared/core-logger" />
             <option value="$PROJECT_DIR$/shared/core-network" />
             <option value="$PROJECT_DIR$/shared/core-preferences" />
+            <option value="$PROJECT_DIR$/shared/feature-album-detail" />
             <option value="$PROJECT_DIR$/shared/feature-homepage" />
             <option value="$PROJECT_DIR$/shared/feature-playlist-detail" />
           </set>
