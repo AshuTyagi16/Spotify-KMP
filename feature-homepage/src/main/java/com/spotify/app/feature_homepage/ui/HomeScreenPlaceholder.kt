@@ -27,7 +27,7 @@ fun HomeScreenPlaceholder() {
         repeat(3) {
             Row(
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(vertical = 10.dp)
             ) {
                 repeat(4) {
                     Column(

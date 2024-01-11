@@ -26,6 +26,31 @@ suspend inline fun <DTO, Domain> RestClientResult<DTO>.mapFromDTO(
     }
 }
 
+suspend fun <T> RestClientResult<T>.onSuccess(lambda: suspend (data: T) -> Unit): RestClientResult<T> {
+    if (status == RestClientResult.Status.SUCCESS) {
+        lambda.invoke(data!!)
+    }
+    return this
+}
+
+suspend fun <T> RestClientResult<T>.onError(lambda: suspend (errorMessage: String, errorCode: Int?) -> Unit): RestClientResult<T> {
+    if (status == RestClientResult.Status.ERROR) {
+        lambda.invoke(errorMessage.orEmpty(), errorCode)
+    }
+    return this
+}
+
+suspend fun <T> RestClientResult<T>.onLoading(lambda: suspend () -> Unit): RestClientResult<T> {
+    if (status == RestClientResult.Status.LOADING) {
+        lambda.invoke()
+    }
+    return this
+}
+
+suspend fun <T> RestClientResult<T>.isLoading() = status == RestClientResult.Status.LOADING
+suspend fun <T> RestClientResult<T>.isSuccess() = status == RestClientResult.Status.SUCCESS
+suspend fun <T> RestClientResult<T>.isError() = status == RestClientResult.Status.ERROR
+
 suspend fun <T> Flow<RestClientResult<T>>.collect(
     onLoading: suspend () -> Unit,
     onSuccess: suspend (data: T) -> Unit,
