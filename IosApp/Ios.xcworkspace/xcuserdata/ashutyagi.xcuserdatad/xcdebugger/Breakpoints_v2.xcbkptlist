@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "FED0D6BE-657A-48D0-AFAD-10D201B4FF4B"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "277CBA57-B9F6-45FD-B136-28FCA1940C2E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ios/HomePageViewModelIos.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "collectUiState()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "620A12F2-7CED-4122-BE7A-52C9ECE01431"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "620A12F2-7CED-4122-BE7A-52C9ECE01431 - 5d987011b9ec33e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.fetchHomePageData$lambda$7$lambda$4$lambda$3#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "620A12F2-7CED-4122-BE7A-52C9ECE01431 - fe8c5f6c06b1a779"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.fetchHomePageData$lambda$7$lambda$4#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "620A12F2-7CED-4122-BE7A-52C9ECE01431 - 6dfa9e204ee29cee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.$fetchHomePageData$lambda$7$lambda$4$lambda$3$FUNCTION_REFERENCE$4.invoke#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "620A12F2-7CED-4122-BE7A-52C9ECE01431 - 982547276d34fe0c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.$fetchHomePageData$lambda$7$lambda$4$lambda$3$FUNCTION_REFERENCE$4.&lt;init&gt;#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "09ED01EC-4E4C-4AAB-92B1-FC1AD3DE7899"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "09ED01EC-4E4C-4AAB-92B1-FC1AD3DE7899 - ff21b217ad767d31"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.fetchHomePageData$lambda$7$lambda$2$lambda$1#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "09ED01EC-4E4C-4AAB-92B1-FC1AD3DE7899 - 93cf72715be955a0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.fetchHomePageData$lambda$7$lambda$2#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "09ED01EC-4E4C-4AAB-92B1-FC1AD3DE7899 - 9e0e89451f5a8c2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.$fetchHomePageData$lambda$7$lambda$2$lambda$1$FUNCTION_REFERENCE$3.invoke#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "04ADBBCE-71E4-422B-AA87-97D75DF4D756"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "04ADBBCE-71E4-422B-AA87-97D75DF4D756 - bc10361bc26ae847"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.fetchHomePageData$lambda$7$lambda$6$lambda$5#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "04ADBBCE-71E4-422B-AA87-97D75DF4D756 - 594d4866b27e38d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.fetchHomePageData$lambda$7$lambda$6#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "04ADBBCE-71E4-422B-AA87-97D75DF4D756 - 3df6af8b7e6b6d4a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.$fetchHomePageData$lambda$7$lambda$6$lambda$5$FUNCTION_REFERENCE$5.invoke#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "04ADBBCE-71E4-422B-AA87-97D75DF4D756 - 681154829cbccfa8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:com.spotify.app.feature_homepage.shared.ui.HomePageViewModel.$fetchHomePageData$lambda$7$lambda$6$lambda$5$FUNCTION_REFERENCE$5.&lt;init&gt;#internal"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/ui/HomePageViewModel.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C03C507-25ED-4C9F-BD20-FF714433E0B2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A93C2641-1888-4BFC-A7F3-F0B6B82CFA1F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4EDAC766-2805-40F1-AC37-03688D67EDD8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F4439729-6F69-4BC7-BA1F-6FB887FF43EB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91C5BB51-746E-42A8-ADB5-28AD88A25415"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19BD4AF4-90A6-46EB-858D-DCFBD09E0DCD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8A0B77A-B413-4D3D-B5AF-41117F5EBF9F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48957C4F-DC66-4F46-B721-3FC0569E9DF0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../shared/feature-homepage/src/commonMain/kotlin/com/spotify/app/feature_homepage/shared/domain/repository/HomePageRepositoryImpl.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ios/HomePageViewModelIos.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "init()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - bec92cf0b30775d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - fa58f93dbc5495c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - f28f5704be1e31d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - 807904d2affc1fd5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - 73a5eb43f2a5bc52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - f4d9129859ccdb03"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - 3df3005f508c7054"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "23E2C4BB-8D80-433F-A279-48754F5D4D85 - 63284ce51fe39655"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; Swift.Optional&lt;()&gt; in Ios.HomePageViewModelIos.init() -&gt; Ios.HomePageViewModelIos"
+                  moduleName = "Ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashutyagi/AndroidStudioProjects/SpotifyKMP/Ios/Ios/Ios/HomePageViewModelIos.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2B11A40-D935-41C4-8610-DA36023AE69D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ios/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
