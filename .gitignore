@@ -124,3 +124,4 @@ Ios/fastlane/test_output
 
 Ios/iOSInjectionProject/
 Ios/*.lock
+/Ios/Ios/Pods/
