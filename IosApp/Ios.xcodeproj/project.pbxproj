@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D94E8EB2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E8EA2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift */; };
+		6D94E8EE2B542BBA0037911E /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 6D94E8ED2B542BBA0037911E /* Shimmer */; };
+		6D94E8F02B542FA20037911E /* HomePageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E8EF2B542FA20037911E /* HomePageScreen.swift */; };
+		6D94E8F32B5431590037911E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6D94E8F22B5431590037911E /* Kingfisher */; };
 		6DDF6A3A2B51C61C00B523D6 /* IosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF6A392B51C61C00B523D6 /* IosApp.swift */; };
-		6DDF6A3C2B51C61C00B523D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF6A3B2B51C61C00B523D6 /* ContentView.swift */; };
 		6DDF6A3E2B51C61E00B523D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF6A3D2B51C61E00B523D6 /* Assets.xcassets */; };
 		6DDF6A412B51C61E00B523D6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF6A402B51C61E00B523D6 /* Preview Assets.xcassets */; };
 		6DDF6A4B2B51C61E00B523D6 /* IosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF6A4A2B51C61E00B523D6 /* IosTests.swift */; };
 		6DDF6A552B51C61E00B523D6 /* IosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF6A542B51C61E00B523D6 /* IosUITests.swift */; };
 		6DDF6A572B51C61E00B523D6 /* IosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF6A562B51C61E00B523D6 /* IosUITestsLaunchTests.swift */; };
-		F512EDF240BC9E06FA4B4FFD /* Pods_Ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDFB855A771CFA87C89608B /* Pods_Ios.framework */; };
+		96872C2BEB48581621465B15 /* Pods_Ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BB434876916D96227FF05D9 /* Pods_Ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,11 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1EDFB855A771CFA87C89608B /* Pods_Ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		262214AC44E004E02C34CD32 /* Pods-Ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ios.debug.xcconfig"; path = "Target Support Files/Pods-Ios/Pods-Ios.debug.xcconfig"; sourceTree = "<group>"; };
+		1B4CFA97726EB7B514D31622 /* Pods-Ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ios.debug.xcconfig"; path = "Target Support Files/Pods-Ios/Pods-Ios.debug.xcconfig"; sourceTree = "<group>"; };
+		5BB434876916D96227FF05D9 /* Pods_Ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D94E8EA2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenLoadingPlaceholder.swift; sourceTree = "<group>"; };
+		6D94E8EF2B542FA20037911E /* HomePageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageScreen.swift; sourceTree = "<group>"; };
 		6DDF6A362B51C61C00B523D6 /* Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DDF6A392B51C61C00B523D6 /* IosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosApp.swift; sourceTree = "<group>"; };
-		6DDF6A3B2B51C61C00B523D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6DDF6A3D2B51C61E00B523D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DDF6A402B51C61E00B523D6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6DDF6A462B51C61E00B523D6 /* IosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +51,7 @@
 		6DDF6A502B51C61E00B523D6 /* IosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DDF6A542B51C61E00B523D6 /* IosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosUITests.swift; sourceTree = "<group>"; };
 		6DDF6A562B51C61E00B523D6 /* IosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B709F6011A9DD094FD90BE15 /* Pods-Ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ios.release.xcconfig"; path = "Target Support Files/Pods-Ios/Pods-Ios.release.xcconfig"; sourceTree = "<group>"; };
+		BDEDB502426B63C53A1546C8 /* Pods-Ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ios.release.xcconfig"; path = "Target Support Files/Pods-Ios/Pods-Ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F512EDF240BC9E06FA4B4FFD /* Pods_Ios.framework in Frameworks */,
+				6D94E8F32B5431590037911E /* Kingfisher in Frameworks */,
+				6D94E8EE2B542BBA0037911E /* Shimmer in Frameworks */,
+				96872C2BEB48581621465B15 /* Pods_Ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +82,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D94E8E72B5429A80037911E /* feature-homepage */ = {
+			isa = PBXGroup;
+			children = (
+				6D94E8E82B5429CB0037911E /* ui */,
+			);
+			path = "feature-homepage";
+			sourceTree = "<group>";
+		};
+		6D94E8E82B5429CB0037911E /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				6D94E8EA2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift */,
+				6D94E8EF2B542FA20037911E /* HomePageScreen.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 		6DDF6A2D2B51C61C00B523D6 = {
 			isa = PBXGroup;
 			children = (
@@ -84,7 +107,7 @@
 				6DDF6A532B51C61E00B523D6 /* IosUITests */,
 				6DDF6A372B51C61C00B523D6 /* Products */,
 				E5D31D2B18ECC1781E266045 /* Pods */,
-				80F431F68D1236F8FC46F0F2 /* Frameworks */,
+				D6C8DA7005E57B784D68BBC9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,8 +124,8 @@
 		6DDF6A382B51C61C00B523D6 /* Ios */ = {
 			isa = PBXGroup;
 			children = (
+				6D94E8E72B5429A80037911E /* feature-homepage */,
 				6DDF6A392B51C61C00B523D6 /* IosApp.swift */,
-				6DDF6A3B2B51C61C00B523D6 /* ContentView.swift */,
 				6DDF6A3D2B51C61E00B523D6 /* Assets.xcassets */,
 				6DDF6A3F2B51C61E00B523D6 /* Preview Content */,
 			);
@@ -134,10 +157,10 @@
 			path = IosUITests;
 			sourceTree = "<group>";
 		};
-		80F431F68D1236F8FC46F0F2 /* Frameworks */ = {
+		D6C8DA7005E57B784D68BBC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1EDFB855A771CFA87C89608B /* Pods_Ios.framework */,
+				5BB434876916D96227FF05D9 /* Pods_Ios.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,8 +168,8 @@
 		E5D31D2B18ECC1781E266045 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				262214AC44E004E02C34CD32 /* Pods-Ios.debug.xcconfig */,
-				B709F6011A9DD094FD90BE15 /* Pods-Ios.release.xcconfig */,
+				1B4CFA97726EB7B514D31622 /* Pods-Ios.debug.xcconfig */,
+				BDEDB502426B63C53A1546C8 /* Pods-Ios.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -158,7 +181,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DDF6A5A2B51C61E00B523D6 /* Build configuration list for PBXNativeTarget "Ios" */;
 			buildPhases = (
-				C82FC2E49B8EECCDF2E4BC26 /* [CP] Check Pods Manifest.lock */,
+				2DD0240802968732F43EFB00 /* [CP] Check Pods Manifest.lock */,
 				6DDF6A322B51C61C00B523D6 /* Sources */,
 				6DDF6A332B51C61C00B523D6 /* Frameworks */,
 				6DDF6A342B51C61C00B523D6 /* Resources */,
@@ -168,6 +191,10 @@
 			dependencies = (
 			);
 			name = Ios;
+			packageProductDependencies = (
+				6D94E8ED2B542BBA0037911E /* Shimmer */,
+				6D94E8F22B5431590037911E /* Kingfisher */,
+			);
 			productName = Ios;
 			productReference = 6DDF6A362B51C61C00B523D6 /* Ios.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +267,10 @@
 				Base,
 			);
 			mainGroup = 6DDF6A2D2B51C61C00B523D6;
+			packageReferences = (
+				6D94E8EC2B542BB90037911E /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				6D94E8F12B5431590037911E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 6DDF6A372B51C61C00B523D6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -278,7 +309,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C82FC2E49B8EECCDF2E4BC26 /* [CP] Check Pods Manifest.lock */ = {
+		2DD0240802968732F43EFB00 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -307,7 +338,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DDF6A3C2B51C61C00B523D6 /* ContentView.swift in Sources */,
+				6D94E8F02B542FA20037911E /* HomePageScreen.swift in Sources */,
+				6D94E8EB2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift in Sources */,
 				6DDF6A3A2B51C61C00B523D6 /* IosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,7 +498,7 @@
 		};
 		6DDF6A5B2B51C61E00B523D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 262214AC44E004E02C34CD32 /* Pods-Ios.debug.xcconfig */;
+			baseConfigurationReference = 1B4CFA97726EB7B514D31622 /* Pods-Ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -497,7 +529,7 @@
 		};
 		6DDF6A5C2B51C61E00B523D6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B709F6011A9DD094FD90BE15 /* Pods-Ios.release.xcconfig */;
+			baseConfigurationReference = BDEDB502426B63C53A1546C8 /* Pods-Ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -642,6 +674,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6D94E8EC2B542BB90037911E /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+		6D94E8F12B5431590037911E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6D94E8ED2B542BBA0037911E /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D94E8EC2B542BB90037911E /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
+		6D94E8F22B5431590037911E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D94E8F12B5431590037911E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6DDF6A2E2B51C61C00B523D6 /* Project object */;
 }
