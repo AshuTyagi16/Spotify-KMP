@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val networkModule = module {
     single<HttpClientApi> {
         HttpClientApiImpl(
-            shouldEnableLogging = CoreNetworkBuildKonfig.DEBUG,
+            shouldEnableLogging = CoreNetworkBuildKonfig.IS_DEBUG,
             json = get(),
             loggerApi = get(),
             preferenceUtilApi = get()

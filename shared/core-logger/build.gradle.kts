@@ -49,15 +49,15 @@ buildkonfig {
     exposeObjectWithName = "CoreLoggerBuildKonfig"
 
     defaultConfigs {
-        buildConfigField(BOOLEAN, "DEBUG", "true")
+        buildConfigField(BOOLEAN, "IS_DEBUG", "true")
     }
 
     defaultConfigs("debug") {
-        buildConfigField(BOOLEAN, "DEBUG", "true")
+        buildConfigField(BOOLEAN, "IS_DEBUG", "true")
     }
 
     defaultConfigs("release") {
-        buildConfigField(BOOLEAN, "DEBUG", "false")
+        buildConfigField(BOOLEAN, "IS_DEBUG", "false")
     }
 }
 

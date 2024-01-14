@@ -40,7 +40,6 @@ import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.core_base.shared.util.BaseConstants
 import com.spotify.app.feature_homepage.shared.ui.HomePageContract
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable

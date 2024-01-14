@@ -100,15 +100,15 @@ buildkonfig {
         buildConfigField(STRING, "CLIENT_ID", tokenProperties["client_id"])
         buildConfigField(STRING, "CLIENT_SECRET", tokenProperties["client_secret"])
         buildConfigField(STRING, "GRANT_TYPE", tokenProperties["grant_type"])
-        buildConfigField(BOOLEAN, "DEBUG", "true")
+        buildConfigField(BOOLEAN, "IS_DEBUG", "true")
     }
 
     defaultConfigs("debug") {
-        buildConfigField(BOOLEAN, "DEBUG", "true")
+        buildConfigField(BOOLEAN, "IS_DEBUG", "true")
     }
 
     defaultConfigs("release") {
-        buildConfigField(BOOLEAN, "DEBUG", "false")
+        buildConfigField(BOOLEAN, "IS_DEBUG", "false")
     }
 }
 

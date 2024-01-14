@@ -9,7 +9,7 @@ targetSdkVersion = "34"
 
 jvmTargetVersion = "1.8"
 
-kotlinCompilerExtensionVersion = "1.5.7"
+kotlinCompilerExtensionVersion = "1.5.8"
 
 agp = "8.2.1"
 kotlin = "1.9.22"

@@ -7,6 +7,6 @@ import org.koin.dsl.module
 
 val loggerModule  = module {
     single<LoggerApi> {
-        LoggerApiImpl(shouldEnableLogs = CoreLoggerBuildKonfig.DEBUG)
+        LoggerApiImpl(shouldEnableLogs = CoreLoggerBuildKonfig.IS_DEBUG)
     }
 }

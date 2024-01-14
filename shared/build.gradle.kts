@@ -1,5 +1,8 @@
 import co.touchlab.skie.configuration.FlowInterop
 import co.touchlab.skie.configuration.EnumInterop
+import co.touchlab.skie.configuration.SealedInterop
+import co.touchlab.skie.configuration.SuspendInterop
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
@@ -58,11 +61,14 @@ kotlin {
     cocoapods {
         summary = "Spotify Kmp Shared Binary"
         homepage = "https://github.com/AshuTyagi16/Spotify-KMP"
-        ios.deploymentTarget = "13.5"
+        ios.deploymentTarget = "13.0"
         extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
         license = "BSD"
         extraSpecAttributes["swift_version"] = "\"5.9.2\""
         framework {
+
+            baseName = "shared"
+
             // Shared Core Network Module
             export(project(":shared:core-network"))
 
@@ -100,6 +106,7 @@ kmmbridge {
     mavenPublishArtifacts()
     spm()
     cocoapods("git@github.com:AshuTyagi16/SpotifyKmpPodspec.git")
+    buildType.set(NativeBuildType.DEBUG)
 }
 
 skie {
@@ -107,7 +114,9 @@ skie {
         group {
             FlowInterop.Enabled(true)
             coroutinesInterop.set(true)
+            SuspendInterop.Enabled(true)
             EnumInterop.Enabled(true)
+            SealedInterop.Enabled(true)
         }
     }
 }

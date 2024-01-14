@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Spotify Kmp Shared Binary'
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
                 
-    spec.ios.deployment_target = '13.5'
+    spec.ios.deployment_target = '13.0'
                 
                 
     if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
