@@ -52,13 +52,7 @@ fun PlaylistDetailComposable(
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(viewModel) {
-        viewModel.fetchPlaylistDetail(
-            fetchPlaylistDetailRequest = FetchPlaylistDetailRequest(
-                playlistId = playlistId,
-                limit = BaseConstants.DEFAULT_PAGE_SIZE,
-                offset = BaseConstants.DEFAULT_OFFSET
-            )
-        )
+        viewModel.fetchPlaylistDetail(playlistId = playlistId)
     }
 
     val data = viewModel.pagingData.collectAsLazyPagingItems()

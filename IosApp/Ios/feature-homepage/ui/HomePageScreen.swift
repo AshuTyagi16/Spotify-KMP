@@ -8,9 +8,12 @@
 import Foundation
 import SwiftUI
 import Kingfisher
+import FlowStacks
 import shared
 
 struct HomePageScreen : View {
+    
+    @EnvironmentObject private var navigator: FlowNavigator<AppRoute>
     
     @State
     private var viewModel: HomePageViewModel?
@@ -18,9 +21,15 @@ struct HomePageScreen : View {
     @State
     private var uiState: HomePageContractHomePageState = HomePageContractHomePageStateIdle()
     
+    
     var body: some View {
         VStack {
-            getViewForState(uiState: uiState)
+            getViewForState(
+                uiState: uiState,
+                onPlaylistClick: { playlistId in
+                    navigator.push(.PlaylistDetail(playlistId: playlistId))
+                }
+            )
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.black)
@@ -34,14 +43,14 @@ struct HomePageScreen : View {
                     }
                     Task {
                         try? await Task.sleep(nanoseconds: 500)
-                        try? await viewModel.setEvent(event: HomePageContractEventOnFetchHomePageEvent())
+                        try? await skie(viewModel).setEvent(event: HomePageContractEventOnFetchHomePageEvent())
                     }
                     for await uiState in viewModel.uiState {
                         self.uiState = uiState.state
                     }
                 }, onCancel: {
                     viewModel.clear()
-                    self.viewModel = nil
+//                    self.viewModel = nil
                 }
             )
         }
@@ -50,11 +59,14 @@ struct HomePageScreen : View {
 }
 
 @ViewBuilder
-private func getViewForState(uiState: HomePageContractHomePageState) -> some View {
+private func getViewForState(
+    uiState: HomePageContractHomePageState,
+    onPlaylistClick: @escaping (_ playlistId: String) -> Void
+) -> some View {
     switch onEnum(of: uiState) {
-    case .idle(let state):
+    case .idle(_):
         EmptyView()
-    case.loading(let state):
+    case.loading(_):
         VStack(alignment: .center) {
             HomeScreenLoadingPlaceholder()
         }
@@ -81,6 +93,9 @@ private func getViewForState(uiState: HomePageContractHomePageState) -> some Vie
                                 .scaledToFit()
                                 .frame(width: 200, height: 200)
                                 .cornerRadius(12)
+                                .onTapGesture {
+                                    onPlaylistClick(playlist.id)
+                                }
                             
                             Text(playlist.name)
                                 .foregroundColor(.white)

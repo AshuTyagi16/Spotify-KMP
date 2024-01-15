@@ -48,6 +48,10 @@ kotlin {
             // ViewModel
             api(libs.androidx.lifecycle.viewmodel)
         }
+        iosMain.dependencies {
+            // Paging
+            api(libs.paging.ios)
+        }
     }
 }
 

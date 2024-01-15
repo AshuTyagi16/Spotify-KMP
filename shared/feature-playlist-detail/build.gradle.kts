@@ -71,6 +71,8 @@ kotlin {
         iosMain.dependencies {
             // SqlDelight
             implementation(libs.bundles.sqldelight.native)
+
+            api(libs.paging.ios)
         }
     }
 }

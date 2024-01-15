@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import FlowStacks
 import shared
 
 @main
 struct IosApp: App {
+    
+    @State private var routes: Routes<AppRoute> = []
     
     init() {
         KoinInitializerKt.doInitKoin()
@@ -18,6 +21,10 @@ struct IosApp: App {
     var body: some Scene {
         WindowGroup {
             HomePageScreen()
+                .showing($routes, embedInNavigationView: true) { route, _ in
+                    route.getView()
+                        .hideNavigationBar()
+                }
         }
     }
 }

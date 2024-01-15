@@ -35,6 +35,9 @@ kotlin {
             // Koin
             implementation(libs.koin)
 
+            // Shared Core Base Module
+            api(project(":shared:core-base"))
+
             // Shared Core Network Module
             api(project(":shared:core-network"))
 
@@ -68,6 +71,9 @@ kotlin {
         framework {
 
             baseName = "shared"
+
+            // Shared Core base Module
+            export(project(":shared:core-base"))
 
             // Shared Core Network Module
             export(project(":shared:core-network"))

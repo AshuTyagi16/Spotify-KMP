@@ -11,6 +11,12 @@
 		6D94E8EE2B542BBA0037911E /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 6D94E8ED2B542BBA0037911E /* Shimmer */; };
 		6D94E8F02B542FA20037911E /* HomePageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E8EF2B542FA20037911E /* HomePageScreen.swift */; };
 		6D94E8F32B5431590037911E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6D94E8F22B5431590037911E /* Kingfisher */; };
+		6D94E8F72B543B6C0037911E /* PlaylistDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E8F62B543B6C0037911E /* PlaylistDetailScreen.swift */; };
+		6D94E9002B5466270037911E /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 6D94E8FF2B5466270037911E /* FlowStacks */; };
+		6D94E9022B5466340037911E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E9012B5466340037911E /* Routes.swift */; };
+		6D94E9052B559C900037911E /* ListLoadingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E9042B559C900037911E /* ListLoadingItem.swift */; };
+		6D94E9072B559DA30037911E /* ListErrorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E9062B559DA30037911E /* ListErrorItem.swift */; };
+		6D94E90A2B55A5ED0037911E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94E9092B55A5ED0037911E /* ViewExtensions.swift */; };
 		6DDF6A3A2B51C61C00B523D6 /* IosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF6A392B51C61C00B523D6 /* IosApp.swift */; };
 		6DDF6A3E2B51C61E00B523D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF6A3D2B51C61E00B523D6 /* Assets.xcassets */; };
 		6DDF6A412B51C61E00B523D6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF6A402B51C61E00B523D6 /* Preview Assets.xcassets */; };
@@ -42,6 +48,11 @@
 		5BB434876916D96227FF05D9 /* Pods_Ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D94E8EA2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenLoadingPlaceholder.swift; sourceTree = "<group>"; };
 		6D94E8EF2B542FA20037911E /* HomePageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageScreen.swift; sourceTree = "<group>"; };
+		6D94E8F62B543B6C0037911E /* PlaylistDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailScreen.swift; sourceTree = "<group>"; };
+		6D94E9012B5466340037911E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		6D94E9042B559C900037911E /* ListLoadingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLoadingItem.swift; sourceTree = "<group>"; };
+		6D94E9062B559DA30037911E /* ListErrorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListErrorItem.swift; sourceTree = "<group>"; };
+		6D94E9092B55A5ED0037911E /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		6DDF6A362B51C61C00B523D6 /* Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DDF6A392B51C61C00B523D6 /* IosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosApp.swift; sourceTree = "<group>"; };
 		6DDF6A3D2B51C61E00B523D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +73,7 @@
 				6D94E8F32B5431590037911E /* Kingfisher in Frameworks */,
 				6D94E8EE2B542BBA0037911E /* Shimmer in Frameworks */,
 				96872C2BEB48581621465B15 /* Pods_Ios.framework in Frameworks */,
+				6D94E9002B5466270037911E /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +111,40 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
+		6D94E8F42B543B240037911E /* feature-playlist-detail */ = {
+			isa = PBXGroup;
+			children = (
+				6D94E8F52B543B300037911E /* ui */,
+			);
+			path = "feature-playlist-detail";
+			sourceTree = "<group>";
+		};
+		6D94E8F52B543B300037911E /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				6D94E8F62B543B6C0037911E /* PlaylistDetailScreen.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		6D94E9032B559C860037911E /* core-ui */ = {
+			isa = PBXGroup;
+			children = (
+				6D94E9082B55A5D90037911E /* extensions */,
+				6D94E9042B559C900037911E /* ListLoadingItem.swift */,
+				6D94E9062B559DA30037911E /* ListErrorItem.swift */,
+			);
+			path = "core-ui";
+			sourceTree = "<group>";
+		};
+		6D94E9082B55A5D90037911E /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6D94E9092B55A5ED0037911E /* ViewExtensions.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		6DDF6A2D2B51C61C00B523D6 = {
 			isa = PBXGroup;
 			children = (
@@ -124,10 +170,13 @@
 		6DDF6A382B51C61C00B523D6 /* Ios */ = {
 			isa = PBXGroup;
 			children = (
+				6D94E9032B559C860037911E /* core-ui */,
+				6D94E8F42B543B240037911E /* feature-playlist-detail */,
 				6D94E8E72B5429A80037911E /* feature-homepage */,
 				6DDF6A392B51C61C00B523D6 /* IosApp.swift */,
 				6DDF6A3D2B51C61E00B523D6 /* Assets.xcassets */,
 				6DDF6A3F2B51C61E00B523D6 /* Preview Content */,
+				6D94E9012B5466340037911E /* Routes.swift */,
 			);
 			path = Ios;
 			sourceTree = "<group>";
@@ -194,6 +243,7 @@
 			packageProductDependencies = (
 				6D94E8ED2B542BBA0037911E /* Shimmer */,
 				6D94E8F22B5431590037911E /* Kingfisher */,
+				6D94E8FF2B5466270037911E /* FlowStacks */,
 			);
 			productName = Ios;
 			productReference = 6DDF6A362B51C61C00B523D6 /* Ios.app */;
@@ -270,6 +320,7 @@
 			packageReferences = (
 				6D94E8EC2B542BB90037911E /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				6D94E8F12B5431590037911E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				6D94E8FE2B5466270037911E /* XCRemoteSwiftPackageReference "FlowStacks" */,
 			);
 			productRefGroup = 6DDF6A372B51C61C00B523D6 /* Products */;
 			projectDirPath = "";
@@ -338,9 +389,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D94E9022B5466340037911E /* Routes.swift in Sources */,
 				6D94E8F02B542FA20037911E /* HomePageScreen.swift in Sources */,
+				6D94E90A2B55A5ED0037911E /* ViewExtensions.swift in Sources */,
 				6D94E8EB2B5429E70037911E /* HomeScreenLoadingPlaceholder.swift in Sources */,
+				6D94E9072B559DA30037911E /* ListErrorItem.swift in Sources */,
+				6D94E8F72B543B6C0037911E /* PlaylistDetailScreen.swift in Sources */,
 				6DDF6A3A2B51C61C00B523D6 /* IosApp.swift in Sources */,
+				6D94E9052B559C900037911E /* ListLoadingItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +748,14 @@
 				minimumVersion = 7.10.2;
 			};
 		};
+		6D94E8FE2B5466270037911E /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -704,6 +768,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6D94E8F12B5431590037911E /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		6D94E8FF2B5466270037911E /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D94E8FE2B5466270037911E /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
