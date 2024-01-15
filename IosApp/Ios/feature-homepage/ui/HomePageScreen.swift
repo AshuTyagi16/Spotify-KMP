@@ -26,8 +26,17 @@ struct HomePageScreen : View {
         VStack {
             getViewForState(
                 uiState: uiState,
-                onPlaylistClick: { playlistId in
-                    navigator.push(.PlaylistDetail(playlistId: playlistId))
+                onPlaylistClick: { playlist in
+                    navigator.push(
+                        .PlaylistDetail(
+                            playlistItem: playlist
+                        )
+                    )
+                },
+                onAlbumClick: { albumItem in
+                    navigator.push(
+                        .AlbumDetail(albumItem: albumItem)
+                    )
                 }
             )
         }
@@ -50,7 +59,9 @@ struct HomePageScreen : View {
                     }
                 }, onCancel: {
                     viewModel.clear()
-//                    self.viewModel = nil
+                    DispatchQueue.main.async {
+                        self.viewModel = nil
+                    }
                 }
             )
         }
@@ -61,7 +72,8 @@ struct HomePageScreen : View {
 @ViewBuilder
 private func getViewForState(
     uiState: HomePageContractHomePageState,
-    onPlaylistClick: @escaping (_ playlistId: String) -> Void
+    onPlaylistClick: @escaping (_ playlistItem: PlaylistItem) -> Void,
+    onAlbumClick: @escaping (_ albumItem: AlbumItem) -> Void
 ) -> some View {
     switch onEnum(of: uiState) {
     case .idle(_):
@@ -85,16 +97,23 @@ private func getViewForState(
                 .padding(.vertical, 10)
             
             ScrollView(.horizontal) {
-                LazyHStack {
+                HStack {
                     ForEach(state.playlists, id: \.id) { playlist in
                         VStack(alignment: .leading) {
                             KFImage(URL(string: playlist.image))
+                                .resizable()
+                                .placeholder({
+                                    Image("Placeholder")
+                                        .resizable()
+                                        .frame(width: 200, height: 200)
+                                        .scaledToFit()
+                                })
                                 .startLoadingBeforeViewAppear()
                                 .scaledToFit()
                                 .frame(width: 200, height: 200)
                                 .cornerRadius(12)
                                 .onTapGesture {
-                                    onPlaylistClick(playlist.id)
+                                    onPlaylistClick(playlist)
                                 }
                             
                             Text(playlist.name)
@@ -133,10 +152,20 @@ private func getViewForState(
                     ForEach(state.albums, id: \.id) { album in
                         VStack(alignment: .leading) {
                             KFImage(URL(string: album.image))
+                                .resizable()
+                                .placeholder({
+                                    Image("Placeholder")
+                                        .resizable()
+                                        .frame(width: 200, height: 200)
+                                        .scaledToFit()
+                                })
                                 .startLoadingBeforeViewAppear()
                                 .scaledToFit()
                                 .frame(width: 200, height: 200)
                                 .cornerRadius(12)
+                                .onTapGesture {
+                                    onAlbumClick(album)
+                                }
                             
                             Text(album.name)
                                 .foregroundColor(.white)

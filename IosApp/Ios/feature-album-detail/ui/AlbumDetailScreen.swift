@@ -1,8 +1,8 @@
 //
-//  PlaylistDetailScreen.swift
+//  AlbumDetailScreen.swift
 //  Ios
 //
-//  Created by Ashu Tyagi on 14/01/24.
+//  Created by Ashu Tyagi on 16/01/24.
 //
 
 import Foundation
@@ -11,21 +11,22 @@ import Kingfisher
 import FlowStacks
 import shared
 
-struct PlaylistDetailScreen : View {
+struct AlbumDetailScreen : View {
     
-    private var playlistItem: PlaylistItem
+    private var albumItem: AlbumItem
     
-    init(playlistItem: PlaylistItem) {
-        self.playlistItem = playlistItem
+    init(albumItem: AlbumItem) {
+        self.albumItem = albumItem
     }
+    
     
     @EnvironmentObject private var navigator: FlowNavigator<AppRoute>
     
     @State
-    private var viewModel: PlaylistDetailViewModel?
+    private var viewModel: AlbumDetailViewModel?
     
     @State
-    private var items: [PlaylistDetailItem] = []
+    private var items: [AlbumDetailItem] = []
     
     @State
     private var hasNextPage: Bool = true
@@ -36,7 +37,7 @@ struct PlaylistDetailScreen : View {
     @State
     private var showLoadingPlaceholder: Bool = false
     
-    private let pagingHelper = SwiftUiPagingHelper<PlaylistDetailItem>()
+    private let pagingHelper = SwiftUiPagingHelper<AlbumDetailItem>()
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -47,26 +48,28 @@ struct PlaylistDetailScreen : View {
                         navigator.goBack()
                     }
                 
-                Text(playlistItem.name)
+                Text(albumItem.name)
                     .foregroundColor(Color.white)
                     .font(.system(size:16, weight: .semibold))
                     .padding(.horizontal, 12)
                 Spacer()
             }
             .padding(.all, 12)
+            
             if(items.isEmpty){
                 Spacer()
             }
             if(!items.isEmpty) {
                 List {
-                    KFImage(URL(string: playlistItem.image))
+                    KFImage(URL(string: albumItem.image))
                         .resizable()
                         .frame(height: 400)
                         .scaledToFit()
                         .listRowInsets(EdgeInsets())
                         .listRowBackground(Color.clear)
+                    
                     ForEach(items, id: \.id) { item in
-                        getPlaylistDetailItemView(playlistDetailItem: item)
+                        getAlbumDetailItemView(albumItem: self.albumItem, albumDetailItem: item)
                     }
                     if(hasNextPage && errorMessage == nil) {
                         getLoadindView()
@@ -104,12 +107,12 @@ struct PlaylistDetailScreen : View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.92))
         .task {
-            let viewModel = SharedModuleDependencies.shared.playlistDetailViewModel
+            let viewModel = SharedModuleDependencies.shared.albumDetailViewModel
             await withTaskCancellationHandler(
                 operation: {
                     self.viewModel = viewModel
                     Task {
-                        try? await viewModel.fetchPlaylistDetail(playlistId: playlistItem.id)
+                        try? await viewModel.fetchAlbumDetail(albumId:albumItem.id)
                     }
                     for await pagingData in viewModel.pagingData {
                         try? await skie(pagingHelper).submitData(pagingData: pagingData)
@@ -187,9 +190,12 @@ private func getErrorView(
 }
 
 @ViewBuilder
-private func getPlaylistDetailItemView(playlistDetailItem: PlaylistDetailItem) -> some View {
+private func getAlbumDetailItemView(
+    albumItem: AlbumItem,
+    albumDetailItem: AlbumDetailItem
+) -> some View {
     HStack(spacing: 6) {
-        KFImage(URL(string: playlistDetailItem.image))
+        KFImage(URL(string: albumItem.image))
             .resizable()
             .placeholder({
                 Image("Placeholder")
@@ -203,11 +209,11 @@ private func getPlaylistDetailItemView(playlistDetailItem: PlaylistDetailItem) -
             .scaledToFit()
         
         VStack(alignment: .leading) {
-            Text(playlistDetailItem.trackName)
+            Text(albumDetailItem.trackName)
                 .foregroundColor(Color.white)
                 .font(.system(size: 14, weight: .semibold))
             
-            Text(playlistDetailItem.artists)
+            Text(albumDetailItem.artists)
                 .foregroundColor(Color.white)
                 .font(.system(size: 14, weight: .regular))
                 .padding(.top, 2)
@@ -217,16 +223,4 @@ private func getPlaylistDetailItemView(playlistDetailItem: PlaylistDetailItem) -
     .padding(.vertical, 12)
     .listRowInsets(EdgeInsets())
     .listRowBackground(Color.clear)
-}
-
-#Preview {
-    PlaylistDetailScreen(
-        playlistItem: PlaylistItem(
-            id: "1",
-            description: "",
-            name: "",
-            image: "",
-            trackCount: 62
-        )
-    )
 }

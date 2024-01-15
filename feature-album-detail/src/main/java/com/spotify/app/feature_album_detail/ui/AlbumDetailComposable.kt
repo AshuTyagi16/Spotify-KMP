@@ -54,13 +54,7 @@ fun AlbumDetailComposable(
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(viewModel) {
-        viewModel.fetchAlbumDetail(
-            fetchAlbumDetailRequest = FetchAlbumDetailRequest(
-                albumId = albumId,
-                limit = BaseConstants.DEFAULT_PAGE_SIZE,
-                offset = BaseConstants.DEFAULT_OFFSET
-            )
-        )
+        viewModel.fetchAlbumDetail(albumId = albumId)
     }
     val data = viewModel.pagingData.collectAsLazyPagingItems()
 

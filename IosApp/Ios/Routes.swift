@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import shared
 
 enum AppRoute: Equatable {
     static func == (lhs: AppRoute, rhs: AppRoute) -> Bool {
@@ -14,11 +15,11 @@ enum AppRoute: Equatable {
     }
     
     case PlaylistDetail(
-        playlistId: String
+        playlistItem: PlaylistItem
     )
     
     case AlbumDetail(
-        albumId: String
+        albumItem: AlbumItem
     )
     
     var key: String {
@@ -35,10 +36,10 @@ extension AppRoute {
     @ViewBuilder
     func getView() -> some View {
         switch self {
-        case.PlaylistDetail(playlistId: let playlistId):
-            PlaylistDetailScreen(playlisId: playlistId)
-        case .AlbumDetail(albumId: let albumId):
-            EmptyView()
+        case.PlaylistDetail(playlistItem: let playlistItem):
+            PlaylistDetailScreen(playlistItem: playlistItem)
+        case .AlbumDetail(albumItem: let albumItem):
+            AlbumDetailScreen(albumItem: albumItem)
         }
     }
 }

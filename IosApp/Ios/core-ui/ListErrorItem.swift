@@ -14,12 +14,12 @@ struct ListErrorItem: View {
     var onRetryClicked : () -> Void = {}
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             
             Text(errorMessage)
                 .foregroundColor(Color.white)
                 .font(.system(size: 14, weight: .semibold))
-                .padding(.vertical, 10)
+                .padding(.top, 12)
             
             Button(action: {
                 onRetryClicked()
@@ -30,9 +30,9 @@ struct ListErrorItem: View {
                     .padding(.all, 8)
             }
             .background(Color.white)
-            .cornerRadius(12)
+            .cornerRadius(16)
+            .padding(.bottom, 12)
         }
-        .padding(.all, 12)
         .frame(maxWidth: .infinity)
     }
 }
