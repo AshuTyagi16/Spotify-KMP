@@ -38,7 +38,8 @@ material = "1.11.0"
 coil = "2.5.0"
 navigation-component = "2.7.6"
 ktlint-gradle = "12.1.0"
-paging = "3.3.0-alpha02-0.4.0"
+paging = "3.3.0-alpha02"
+paging-ios = "3.3.0-alpha02-0.4.0"
 compose-shimmer = "1.2.0"
 
 [libraries]
@@ -54,9 +55,9 @@ multiplatform-settings = { module = "com.russhwolf:multiplatform-settings-no-arg
 multiplatform-settings-couroutine = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "prferences" }
 
 ## Paging
-paging = { module = "app.cash.paging:paging-common", version.ref = "paging" }
-paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
-paging-ios = { module = "app.cash.paging:paging-runtime-uikit", version.ref = "paging" }
+paging = { module = "androidx.paging:paging-common", version.ref = "paging" }
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
+paging-ios = { module = "app.cash.paging:paging-runtime-uikit", version.ref = "paging-ios" }
 
 ## Compose Shimmer
 compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "compose-shimmer" }
