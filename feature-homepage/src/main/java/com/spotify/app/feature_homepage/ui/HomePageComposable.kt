@@ -38,6 +38,7 @@ import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.spotify.app.core_base.shared.domain.model.AlbumItem
 import com.spotify.app.core_base.shared.util.BaseConstants
+import com.spotify.app.feature_homepage.shared.domain.model.playlist.PlaylistItem
 import com.spotify.app.feature_homepage.shared.ui.HomePageContract
 import com.spotify.app.feature_homepage.shared.ui.HomePageViewModel
 import kotlinx.coroutines.launch
@@ -45,7 +46,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomePageComposable(
     viewModel: HomePageViewModel,
-    onPlaylistClick: (playlistId: String) -> Unit,
+    onPlaylistClick: (playlistItem: PlaylistItem) -> Unit,
     onAlbumClick: (albumItem: AlbumItem) -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -108,7 +109,7 @@ fun HomePageComposable(
 @Composable
 private fun HomePageSuccessStateComposable(
     data: HomePageContract.HomePageState.Success,
-    onPlaylistClick: (playlistId: String) -> Unit,
+    onPlaylistClick: (playlistItem: PlaylistItem) -> Unit,
     onAlbumClick: (albumItem: AlbumItem) -> Unit
 ) {
     val playlists = data.playlists
@@ -162,7 +163,7 @@ private fun HomePageSuccessStateComposable(
                                 .width(200.dp)
                                 .height(200.dp)
                                 .clickable {
-                                    onPlaylistClick.invoke(it.id)
+                                    onPlaylistClick.invoke(it)
                                 }
                         )
 

@@ -20,8 +20,12 @@ import java.net.URLEncoder
 
 private const val ANIMATION_DURATION = 500
 private const val PLAYLIST_ID = "PLAYLIST_ID"
+private const val PLAYLIST_NAME = "PLAYLIST_NAME"
+private const val PLAYLIST_IMAGE = "PLAYLIST_IMAGE"
+
 private const val ALBUM_ID = "ALBUM_ID"
-private const val ALBUM_URL = "ALBUM_URL"
+private const val ALBUM_IMAGE = "ALBUM_IMAGE"
+private const val ALBUM_NAME = "ALBUM_NAME"
 
 @Composable
 fun SpotifyRootView() {
@@ -60,13 +64,20 @@ fun SpotifyRootView() {
             val viewModel = koinViewModel<HomePageViewModel>()
             HomePageComposable(
                 viewModel = viewModel,
-                onPlaylistClick = { playlistId ->
-                    navController.navigate(Screen.PlaylistDetail.withArgs(playlistId))
+                onPlaylistClick = { playlistItem ->
+                    navController.navigate(
+                        Screen.PlaylistDetail.withArgs(
+                            playlistItem.id,
+                            playlistItem.name,
+                            URLEncoder.encode(playlistItem.image, "utf-8")
+                        )
+                    )
                 },
                 onAlbumClick = { albumItem ->
                     navController.navigate(
                         Screen.AlbumDetail.withArgs(
                             albumItem.id,
+                            albumItem.name,
                             URLEncoder.encode(albumItem.image, "utf-8")
                         )
                     )
@@ -76,9 +87,17 @@ fun SpotifyRootView() {
 
         // Playlist Detail
         composable(
-            route = Screen.PlaylistDetail.route + "/{$PLAYLIST_ID}",
+            route = Screen.PlaylistDetail.route + "/{$PLAYLIST_ID}" + "/{$PLAYLIST_NAME}" + "/{$PLAYLIST_IMAGE}",
             arguments = listOf(
                 navArgument(PLAYLIST_ID) {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument(PLAYLIST_NAME) {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument(PLAYLIST_IMAGE) {
                     type = NavType.StringType
                     nullable = false
                 },
@@ -109,22 +128,33 @@ fun SpotifyRootView() {
             }
         ) { entry ->
             val playlistId = entry.arguments?.getString(PLAYLIST_ID)!!
+            val playlistName = entry.arguments?.getString(PLAYLIST_NAME)!!
+            val playlistImage = entry.arguments?.getString(PLAYLIST_IMAGE)!!
             val viewModel = koinViewModel<PlaylistDetailViewModel>()
             PlaylistDetailComposable(
                 playlistId = playlistId,
-                viewModel = viewModel
+                playlistName = playlistName,
+                playlistImage = playlistImage,
+                viewModel = viewModel,
+                onBackPressed = {
+                    navController.popBackStack()
+                }
             )
         }
 
         // Album Detail
         composable(
-            route = Screen.AlbumDetail.route + "/{$ALBUM_ID}" + "/{$ALBUM_URL}",
+            route = Screen.AlbumDetail.route + "/{$ALBUM_ID}" + "/{$ALBUM_NAME}" + "/{$ALBUM_IMAGE}",
             arguments = listOf(
                 navArgument(ALBUM_ID) {
                     type = NavType.StringType
                     nullable = false
                 },
-                navArgument(ALBUM_URL) {
+                navArgument(ALBUM_NAME) {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument(ALBUM_IMAGE) {
                     type = NavType.StringType
                     nullable = false
                 },
@@ -155,12 +185,18 @@ fun SpotifyRootView() {
             }
         ) { entry ->
             val albumId = entry.arguments?.getString(ALBUM_ID)!!
-            val albumUrl = entry.arguments?.getString(ALBUM_URL)!!
+            val albumName = entry.arguments?.getString(ALBUM_NAME)!!
+            val albumImage = entry.arguments?.getString(ALBUM_IMAGE)!!
             val viewModel = koinViewModel<AlbumDetailViewModel>()
+
             AlbumDetailComposable(
                 albumId = albumId,
-                albumUrl = albumUrl,
-                viewModel = viewModel
+                albumName = albumName,
+                albumImage = albumImage,
+                viewModel = viewModel,
+                onBackPressed = {
+                    navController.popBackStack()
+                }
             )
         }
     }

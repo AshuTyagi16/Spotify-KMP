@@ -1,6 +1,9 @@
 package com.spotify.app.feature_album_detail.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,7 +30,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,16 +44,18 @@ import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.spotify.app.core_base.shared.util.BaseConstants
-import com.spotify.app.feature_album_detail.shared.domain.model.FetchAlbumDetailRequest
 import com.spotify.app.feature_album_detail.shared.ui.AlbumDetailViewModel
 import kotlinx.coroutines.launch
 import java.net.URLDecoder
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AlbumDetailComposable(
     albumId: String,
-    albumUrl: String,
-    viewModel: AlbumDetailViewModel
+    albumName: String,
+    albumImage: String,
+    viewModel: AlbumDetailViewModel,
+    onBackPressed: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -69,8 +76,55 @@ fun AlbumDetailComposable(
         ) {
             LazyColumn(
                 modifier = Modifier
-                    .padding(12.dp)
             ) {
+                stickyHeader {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.Black.copy(alpha = 0.92f))
+                            .padding(horizontal = 6.dp, vertical = 12.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = com.spotify.app.core_ui.R.drawable.ic_arrow_back),
+                            contentDescription = "Back Button",
+                            colorFilter = ColorFilter.tint(Color.White),
+                            modifier = Modifier
+                                .clickable {
+                                    onBackPressed.invoke()
+                                }
+                        )
+
+                        Text(
+                            text = albumName,
+                            color = Color.White,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            maxLines = 1,
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp)
+                        )
+                    }
+                }
+                item {
+                    AsyncImage(
+                        model = URLDecoder.decode(albumImage, "utf-8"),
+                        placeholder = rememberAsyncImagePainter(
+                            model = BaseConstants.LOADING_ERROR_PLACEHOLDER
+                        ),
+                        error = rememberAsyncImagePainter(
+                            model = BaseConstants.LOADING_ERROR_PLACEHOLDER
+                        ),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = albumName,
+                        modifier = Modifier
+                            .fillParentMaxWidth()
+                            .height(400.dp)
+                    )
+                }
+                item {
+                    Spacer(modifier = Modifier.height(6.dp))
+                }
                 items(
                     count = data.itemCount,
                     key = data.itemKey { it.id },
@@ -80,7 +134,7 @@ fun AlbumDetailComposable(
                             .padding(vertical = 5.dp)
                     ) {
                         AsyncImage(
-                            model = URLDecoder.decode(albumUrl, "utf-8"),
+                            model = URLDecoder.decode(albumImage, "utf-8"),
                             placeholder = rememberAsyncImagePainter(
                                 model = BaseConstants.LOADING_ERROR_PLACEHOLDER
                             ),

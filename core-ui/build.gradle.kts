@@ -2,11 +2,10 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.ktlint)
 }
 
 android {
-    namespace = "com.spotify.app.feature_homepage"
+    namespace = "com.spotify.app.core_ui"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
@@ -32,44 +31,13 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.jvmTargetVersion.get()
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
-    }
 }
 
 dependencies {
 
-    // Shared Feature HomePage Module
-    implementation(project(":shared:feature-homepage"))
-
-    // Compose Shimmer
-    implementation(libs.compose.shimmer)
-
-    // Coil (Image Loading)
-    implementation(libs.coil)
-
-    // Core Ktx
     implementation(libs.core.ktx)
-
-    // Lifecycle Ktx
-    implementation(libs.lifecycle.runtime.ktx)
-
-    // Koin
-    implementation(libs.koin)
-    implementation(libs.koin.android)
-
-    //Compose
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
-
-    // Testing
+    implementation(libs.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
