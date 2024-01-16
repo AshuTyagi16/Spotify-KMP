@@ -1,5 +1,10 @@
 <h1 align="center">Spotify-KMP</h1>
 
+<p align="center">
+  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+  <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
+</p>
+
 
 ## Tech stack & Open-source libraries
 - **Minimum SDK level**
@@ -34,6 +39,20 @@
 - [Store](https://github.com/MobileNativeFoundation/Store) : A Kotlin Multiplatform library for building network-resilient applications (Build offline first apps)
 - [SqlDelight](https://github.com/cashapp/sqldelight): Multiplatform SQLite Database (Generates typesafe Kotlin APIs from SQL)
 
+## Features
+- Playlist + Album Listing on HomePage
+- Track listing inside playlist & album
+- Paging Support in track listing screen using [Paging3](https://github.com/cashapp/multiplatform-paging)
+- Loading / Error footer support while paging + retry functionlity in listing (supported in both android & ios)
+- Offline first (Load from in-memory cache -> disk -> network) using [Store](https://github.com/MobileNativeFoundation/Store)
+- Multi module support in android & shared modules
+- Better support for suspend + flows + sealed classes using [SKIE](https://skie.touchlab.co)
+- Publish IOS Binary as POD framework using [KMMBridge](https://kmmbridge.touchlab.co)
+- BuildConfig + Product Flavour inside shared module using [BuildKonfig](https://github.com/yshrsmz/BuildKonfig)
+- Dependency injection using [Koin](https://github.com/InsertKoinIO/koin)
+- Database caching using [SqlDelight](https://github.com/cashapp/sqldelight)
+- Access/Refresh Token functionality using [Ktor Auth Plugin](https://ktor.io/docs/bearer-client.html)
+
 ## Modularization
 
 **Spotift-KMP** adopted modularization strategies below:
@@ -43,9 +62,14 @@
 - **Strict visibility control**: Modules restrict to expose dedicated components and access to other layers, so it prevents they're being used outside the module
 - **Decentralized focusing**: Each developer team can assign their dedicated module and they can focus on their own modules.
 
-**NOTE**: The same modularization strategies are used for shared module as well
+**NOTE**: The same modularization strategies are used for [shared](https://github.com/AshuTyagi16/Spotify-KMP/tree/main/shared) module as well
 
 For more information, check out the [Guide to app modularization](https://developer.android.com/topic/modularization).
+
+## TODO
+- Shared resource support using [moko-resources](https://github.com/icerockdev/moko-resources)
+- MultiModule structure in iOS project
+
 
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/AshuTyagi16/Spotify-KMP/stargazers)__ for this repository. :star: <br>
