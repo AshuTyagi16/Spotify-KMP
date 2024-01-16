@@ -14,8 +14,9 @@ struct HomeScreenLoadingPlaceholder : View {
     var body: some View {
         VStack {
             Spacer()
-                .frame(height: 20)
-            ForEach((1...3), id: \.self) { index in
+                .frame(height: 200)
+                .background(Color.black)
+            ForEach((1...4), id: \.self) { index in
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach((1...4), id: \.self) { index in
@@ -28,10 +29,9 @@ struct HomeScreenLoadingPlaceholder : View {
                                 
                                 Text("")
                                     .frame(width: 180, height: 8)
-                                    .background(RoundedRectangle(cornerRadius: 12).fill(Color.white.opacity(0.2)))
+                                    .background(Color.white.opacity(0.2))
                                     .padding(.horizontal, 6)
                             }
-                            .shimmering()
                         }
                     }
                 }
@@ -41,6 +41,7 @@ struct HomeScreenLoadingPlaceholder : View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .shimmering()
         .background(Color.black)
     }
     

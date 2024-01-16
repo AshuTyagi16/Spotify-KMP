@@ -29,7 +29,7 @@ struct AlbumDetailScreen : View {
     private var items: [AlbumDetailItem] = []
     
     @State
-    private var hasNextPage: Bool = true
+    private var hasNextPage: Bool = false
     
     @State
     private var errorMessage: String? = nil
@@ -44,6 +44,7 @@ struct AlbumDetailScreen : View {
             HStack {
                 Image(systemName: "arrow.left")
                     .frame(width: 16, height: 16)
+                    .foregroundColor(Color.white)
                     .onTapGesture {
                         navigator.goBack()
                     }
@@ -56,56 +57,48 @@ struct AlbumDetailScreen : View {
             }
             .padding(.all, 12)
             
-            if(items.isEmpty){
-                Spacer()
-            }
-            if(!items.isEmpty) {
-                List {
-                    KFImage(URL(string: albumItem.image))
-                        .resizable()
-                        .frame(height: 400)
-                        .scaledToFit()
+            List {
+                KFImage(URL(string: albumItem.image))
+                    .resizable()
+                    .frame(height: 400)
+                    .scaledToFit()
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
+                
+                ForEach(items, id: \.id) { item in
+                    getAlbumDetailItemView(albumItem: albumItem, albumDetailItem: item)
+                }
+                
+                if(showLoadingPlaceholder) {
+                    DetailLoadingPlaceholder()
                         .listRowInsets(EdgeInsets())
                         .listRowBackground(Color.clear)
-                    
-                    ForEach(items, id: \.id) { item in
-                        getAlbumDetailItemView(albumItem: self.albumItem, albumDetailItem: item)
-                    }
-                    if(hasNextPage && errorMessage == nil) {
-                        getLoadindView()
-                            .onAppear{
-                                pagingHelper.loadNextPage()
-                            }
-                    }
-                    if(errorMessage != nil) {
-                        getErrorView(
-                            errorMessage: errorMessage!,
-                            onRetryClicked: {
-                                pagingHelper.retry()
-                                self.errorMessage = nil
-                            }
-                        )
-                    }
                 }
-                .listStyle(.plain)
-                .background(Color.black.opacity(0.92))
-            } else if(showLoadingPlaceholder) {
-                getLoadindView()
-            } else if(errorMessage != nil && items.isEmpty) {
-                getErrorView(
-                    errorMessage: errorMessage!,
-                    onRetryClicked: {
-                        pagingHelper.retry()
-                        self.errorMessage = nil
-                    }
-                )
+                
+                if(hasNextPage && errorMessage == nil && !items.isEmpty) {
+                    getLoadindView()
+                        .onAppear{
+                            pagingHelper.loadNextPage()
+                        }
+                }
+                if(errorMessage != nil) {
+                    getErrorView(
+                        errorMessage: errorMessage!,
+                        onRetryClicked: {
+                            pagingHelper.retry()
+                            self.errorMessage = nil
+                        }
+                    )
+                }
             }
+            .listStyle(.plain)
+            
             if(items.isEmpty){
                 Spacer()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.opacity(0.92))
+        .background(Color.black.opacity(0.92)).edgesIgnoringSafeArea(.bottom)
         .task {
             let viewModel = SharedModuleDependencies.shared.albumDetailViewModel
             await withTaskCancellationHandler(
