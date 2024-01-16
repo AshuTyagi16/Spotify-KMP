@@ -7,6 +7,8 @@
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
 </p>
 
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/9783c661-0c4c-4da1-8404-9d55b919575e" align="right" width="320"/>
+
 ## 🛠 How to run?
 - Clone the repository
 - Add a file called ```token.properties``` in top level folder.
