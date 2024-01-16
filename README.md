@@ -7,6 +7,18 @@
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
 </p>
 
+## 🛠 How to run?
+- Clone the repository
+- Add a file called ```token.properties``` in top level folder.
+- Add the following content to the file:
+```properties
+client_id=your_client_id_here
+client_secret=your_client_secret_here
+grant_type=client_credentials 
+```
+- And that's it!!
+
+**NOTE:** You can register your app on [spotify dashboard](https://developer.spotify.com/dashboard) & generate above credentials.
 
 ## Tech stack & Open-source libraries
 - **Minimum SDK level**
