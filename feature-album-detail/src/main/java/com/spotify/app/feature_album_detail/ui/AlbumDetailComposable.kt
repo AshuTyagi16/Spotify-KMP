@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -191,18 +192,20 @@ fun AlbumDetailComposable(
                         item {
                             Box(
                                 modifier = Modifier
-                                    .fillParentMaxSize()
-                                    .height(50.dp),
+                                    .fillParentMaxWidth()
+                                    .padding(top = 100.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Button(
+                                    modifier = Modifier,
+                                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                                     onClick = {
                                         data.retry()
                                     }
                                 ) {
                                     Text(
                                         text = "Retry",
-                                        color = Color.White
+                                        color = Color.Black
                                     )
                                 }
                             }
@@ -240,13 +243,15 @@ fun AlbumDetailComposable(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Button(
+                                    modifier = Modifier,
+                                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                                     onClick = {
                                         data.retry()
                                     }
                                 ) {
                                     Text(
                                         text = "Retry",
-                                        color = Color.White
+                                        color = Color.Black
                                     )
                                 }
                             }
