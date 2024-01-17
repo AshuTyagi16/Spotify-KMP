@@ -9,6 +9,15 @@ android {
     namespace = "com.spotify.app.kmp"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
+    signingConfigs {
+        register("release") {
+            storeFile = file("../cert")
+            storePassword = "SpotifyKMP"
+            keyAlias = "SpotifyKMP"
+            keyPassword = "SpotifyKMP"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.spotify.app.kmp"
         minSdk = libs.versions.minSdkVersion.get().toInt()
@@ -24,11 +33,12 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = libs.versions.isMinifyEnabled.get().toBooleanStrict()
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

@@ -1,5 +1,5 @@
 [versions]
-
+isMinifyEnabled = "true"
 appVersionCode = "1"
 appVersionName = "1.0"
 
