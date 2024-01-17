@@ -18,11 +18,14 @@ client_id=your_client_id_here
 client_secret=your_client_secret_here
 grant_type=client_credentials 
 ```
-- And that's it!!
+- And that's it!! You can run the app now.
 
 **NOTE:** You can register your app on [spotify dashboard](https://developer.spotify.com/dashboard) & generate above credentials.
 
 ## Tech stack & Open-source libraries
+
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/af776a1a-75a2-4c0e-8de9-c8966a2793ed" align="right" width="320"/>
+
 - **Minimum SDK level**
   - Android 21
   - iOS 15  
