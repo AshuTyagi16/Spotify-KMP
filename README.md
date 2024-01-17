@@ -58,6 +58,81 @@ grant_type=client_credentials
 - [Store](https://github.com/MobileNativeFoundation/Store) : A Kotlin Multiplatform library for building network-resilient applications (Build offline first apps)
 - [SqlDelight](https://github.com/cashapp/sqldelight): Multiplatform SQLite Database (Generates typesafe Kotlin APIs from SQL)
 
+----
+
+<table>
+<tr>
+  
+<h3>Pagination Loading State Footer</h3>
+
+<td>
+
+<h4>Android</h4>
+
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/f342cb25-75ca-4aee-91d1-fe24677b4c87" width="320"></img>
+
+
+</td>
+<td>
+  
+<h4>IOS</h4>
+  
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/ff32ec97-b8ea-4594-9ecd-7b0e8c62ca3c" width="320"></img>
+
+</td>
+
+</tr>
+
+</table>
+
+<table>
+<tr>
+  
+  <h3>Pagination Initial Load Error</h3>
+  
+<td>
+  
+<h4>Android</h4>
+
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/96553097-8b5a-4bfe-8509-04e03da381f5" width="320"></img>
+
+
+</td>
+<td>
+  
+<h4>IOS</h4>
+  
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/8f3abf28-1463-47d2-83eb-23b6e1ad9d13" width="320"></img>
+
+</td>
+
+</tr>
+</table>
+
+<table>
+<tr>
+  
+  <h3>Pagination Error State Footer</h3>
+  
+<td>
+  
+<h4>Android</h4>
+
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/05d15489-1a8e-4025-bedc-9eb3dc7edd51" width="320"></img>
+
+
+</td>
+<td>
+  
+<h4>IOS</h4>
+  
+<img src="https://github.com/AshuTyagi16/Spotify-KMP/assets/18714067/4db1c7a1-a5e5-4fef-b081-395f5189c537" width="320"></img>
+
+</td>
+
+</tr>
+</table>
+
 ## Features
 - Playlist + Album Listing on HomePage
 - Track listing inside playlist & album
