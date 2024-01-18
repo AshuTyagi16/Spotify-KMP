@@ -163,6 +163,7 @@ For more information, check out the [Guide to app modularization](https://develo
 ## TODO
 - Shared resource support using [moko-resources](https://github.com/icerockdev/moko-resources)
 - MultiModule structure in iOS project
+- Test cases for the common code
 
 
 ## Find this repository useful? :heart:
